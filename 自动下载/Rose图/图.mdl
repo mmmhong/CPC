@@ -193,7 +193,31 @@
 				fill_color 	13434879
 				quidu      	"5AB0B91402FA"
 				height     	118)
-			    (object ClassView "Class" "Use Case View::系统用例图::现场工程师" @2
+			    (object UseCaseView "Use Case View::业务用例图::迁移数据" @2
+				location   	(1024, 880)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				label      	(object ItemLabel
+				    Parent_View 	@2
+				    location   	(1024, 1018)
+				    anchor_loc 	1
+				    nlines     	2
+				    max_width  	630
+				    justify    	0
+				    label      	"迁移数据")
+				icon_style 	"Icon"
+				line_color 	3342489
+				fill_color 	13434879
+				quidu      	"5AB0BEDB0030"
+				height     	118)
+			    (object ClassView "Class" "Use Case View::系统用例图::现场工程师" @3
 				ShowCompartmentStereotypes 	TRUE
 				IncludeAttribute 	TRUE
 				IncludeOperation 	TRUE
@@ -208,11 +232,11 @@
 				    color      	0
 				    default_color 	TRUE)
 				label      	(object ItemLabel
-				    Parent_View 	@2
+				    Parent_View 	@3
 				    location   	(448, 768)
 				    anchor_loc 	1
 				    nlines     	2
-				    max_width  	328
+				    max_width  	325
 				    justify    	0
 				    label      	"现场工程师")
 				icon       	"Actor"
@@ -221,7 +245,7 @@
 				quidu      	"5AB0C097016F"
 				annotation 	8
 				autoResize 	TRUE)
-			    (object AssociationViewNew "$UNNAMED$6" @3
+			    (object AssociationViewNew "$UNNAMED$6" @4
 				location   	(709, 494)
 				font       	(object Font
 				    size       	10
@@ -236,54 +260,30 @@
 				line_color 	3342489
 				quidu      	"5AB0EE7A0187"
 				roleview_list 	(list RoleViews
-				    (object RoleView "$UNNAMED$7" @4
-					Parent_View 	@3
+				    (object RoleView "$UNNAMED$7" @5
+					Parent_View 	@4
 					location   	(261, -258)
 					stereotype 	TRUE
 					line_color 	3342489
 					quidu      	"5AB0EE7A03E7"
-					client     	@3
+					client     	@4
 					supplier   	@1
 					vertices   	(list Points
 					    (709, 494)
-					    (913, 409))
+					    (1024, 368))
 					line_style 	0)
-				    (object RoleView "$UNNAMED$8" @5
-					Parent_View 	@3
+				    (object RoleView "$UNNAMED$8" @6
+					Parent_View 	@4
 					location   	(261, -258)
 					stereotype 	TRUE
 					line_color 	3342489
 					quidu      	"5AB0EE7B0001"
-					client     	@3
-					supplier   	@2
+					client     	@4
+					supplier   	@3
 					vertices   	(list Points
 					    (709, 494)
 					    (505, 579))
 					line_style 	0)))
-			    (object UseCaseView "Use Case View::业务用例图::迁移数据" @6
-				location   	(1024, 880)
-				font       	(object Font
-				    size       	10
-				    face       	"Arial"
-				    bold       	FALSE
-				    italics    	FALSE
-				    underline  	FALSE
-				    strike     	FALSE
-				    color      	0
-				    default_color 	TRUE)
-				label      	(object ItemLabel
-				    Parent_View 	@6
-				    location   	(1024, 1018)
-				    anchor_loc 	1
-				    nlines     	2
-				    max_width  	630
-				    justify    	0
-				    label      	"迁移数据")
-				icon_style 	"Icon"
-				line_color 	3342489
-				fill_color 	13434879
-				quidu      	"5AB0BEDB0030"
-				height     	118)
 			    (object AssociationViewNew "$UNNAMED$9" @7
 				location   	(709, 729)
 				font       	(object Font
@@ -306,10 +306,10 @@
 					line_color 	3342489
 					quidu      	"5AB0EE7C0376"
 					client     	@7
-					supplier   	@6
+					supplier   	@2
 					vertices   	(list Points
 					    (709, 729)
-					    (913, 826))
+					    (913, 825))
 					line_style 	0)
 				    (object RoleView "$UNNAMED$11" @9
 					Parent_View 	@7
@@ -318,10 +318,10 @@
 					line_color 	3342489
 					quidu      	"5AB0EE7C0378"
 					client     	@7
-					supplier   	@2
+					supplier   	@3
 					vertices   	(list Points
 					    (709, 729)
-					    (505, 633))
+					    (505, 634))
 					line_style 	0)))))))
 	    (object Class_Category "系统用例图"
 		quid       	"5AB0BEFE01D9"
@@ -354,14 +354,27 @@
 			stereotype 	"Actor")
 		    (object UseCase "获取权限"
 			quid       	"5AB0C0AA02B8")
-		    (object UseCase "持久化"
-			quid       	"5AB0C0BA0224")
+		    (object UseCase "数据导入"
+			quid       	"5AB0C0BA0224"
+			visible_modules 	(list dependency_list
+			    (object Dependency_Relationship
+				quid       	"5AB23C060321"
+				supplier   	"Use Case View::系统用例图::配置源数据库"
+				quidu      	"5AB0FA8E0370")
+			    (object Dependency_Relationship
+				quid       	"5AB23C080051"
+				supplier   	"Use Case View::系统用例图::配置目标数据库"
+				quidu      	"5AB0C254003A")
+			    (object Dependency_Relationship
+				quid       	"5AB23C0900C1"
+				supplier   	"Use Case View::系统用例图::数据存储"
+				quidu      	"5AB0C83F026E")))
 		    (object UseCase "配置目标数据库"
 			quid       	"5AB0C254003A"
 			superclasses 	(list inheritance_relationship_list
 			    (object Inheritance_Relationship
 				quid       	"5AB0FAB80104"
-				supplier   	"Use Case View::系统用例图::持久化"
+				supplier   	"Use Case View::系统用例图::数据导入"
 				quidu      	"5AB0C0BA0224")))
 		    (object UseCase "NewUseCase3"
 			quid       	"5AB0C4060193")
@@ -380,7 +393,7 @@
 			superclasses 	(list inheritance_relationship_list
 			    (object Inheritance_Relationship
 				quid       	"5AB0F93B0356"
-				supplier   	"Use Case View::系统用例图::持久化"
+				supplier   	"Use Case View::系统用例图::数据导入"
 				quidu      	"5AB0C0BA0224")))
 		    (object UseCase "手工配置Cookie"
 			quid       	"5AB0EFFB01E2"
@@ -413,7 +426,7 @@
 			superclasses 	(list inheritance_relationship_list
 			    (object Inheritance_Relationship
 				quid       	"5AB0F2AA024A"
-				supplier   	"Use Case View::系统用例图::持久化"
+				supplier   	"Use Case View::系统用例图::数据导入"
 				quidu      	"5AB0C0BA0224")))
 		    (object UseCase "配置请求信息"
 			quid       	"5AB0F6EF0273")
@@ -428,7 +441,7 @@
 			superclasses 	(list inheritance_relationship_list
 			    (object Inheritance_Relationship
 				quid       	"5AB0FAB30204"
-				supplier   	"Use Case View::系统用例图::持久化"
+				supplier   	"Use Case View::系统用例图::数据导入"
 				quidu      	"5AB0C0BA0224")))
 		    (object UseCase "数据迁移"
 			quid       	"5AB0FAD00298"
@@ -458,7 +471,7 @@
 			roles      	(list role_list
 			    (object Role "$UNNAMED$16"
 				quid       	"5AB0C26B018B"
-				supplier   	"Use Case View::系统用例图::持久化"
+				supplier   	"Use Case View::系统用例图::数据导入"
 				quidu      	"5AB0C0BA0224"
 				is_navigable 	TRUE)
 			    (object Role "$UNNAMED$17"
@@ -506,7 +519,7 @@
 			roles      	(list role_list
 			    (object Role "$UNNAMED$28"
 				quid       	"5AB0FABE014B"
-				supplier   	"Use Case View::系统用例图::持久化"
+				supplier   	"Use Case View::系统用例图::数据导入"
 				quidu      	"5AB0C0BA0224"
 				is_navigable 	TRUE)
 			    (object Role "$UNNAMED$29"
@@ -524,7 +537,19 @@
 			    (object Role "$UNNAMED$32"
 				quid       	"5AB0FAD903E0"
 				supplier   	"Use Case View::系统用例图::现场工程师"
-				quidu      	"5AB0C097016F"))))
+				quidu      	"5AB0C097016F")))
+		    (object Association "$UNNAMED$33"
+			quid       	"5AB23BF602CD"
+			roles      	(list role_list
+			    (object Role "$UNNAMED$34"
+				quid       	"5AB23BF701E0"
+				supplier   	"Use Case View::系统用例图::配置源数据库"
+				quidu      	"5AB0FA8E0370"
+				is_navigable 	TRUE)
+			    (object Role "$UNNAMED$35"
+				quid       	"5AB23BF701E2"
+				supplier   	"Use Case View::系统用例图::数据导入"
+				quidu      	"5AB0C0BA0224"))))
 		logical_presentations 	(list unit_reference_list
 		    (object UseCaseDiagram "下载系统用例图"
 			quid       	"5AB0BF0E021B"
@@ -535,55 +560,7 @@
 			origin_x   	0
 			origin_y   	0
 			items      	(list diagram_item_list
-			    (object UseCaseView "Use Case View::系统用例图::获取权限" @10
-				location   	(720, 464)
-				font       	(object Font
-				    size       	10
-				    face       	"Arial"
-				    bold       	FALSE
-				    italics    	FALSE
-				    underline  	FALSE
-				    strike     	FALSE
-				    color      	0
-				    default_color 	TRUE)
-				label      	(object ItemLabel
-				    Parent_View 	@10
-				    location   	(720, 602)
-				    anchor_loc 	1
-				    nlines     	2
-				    max_width  	630
-				    justify    	0
-				    label      	"获取权限")
-				icon_style 	"Icon"
-				line_color 	3342489
-				fill_color 	13434879
-				quidu      	"5AB0C0AA02B8"
-				height     	118)
-			    (object UseCaseView "Use Case View::系统用例图::持久化" @11
-				location   	(1344, 896)
-				font       	(object Font
-				    size       	10
-				    face       	"Arial"
-				    bold       	FALSE
-				    italics    	FALSE
-				    underline  	FALSE
-				    strike     	FALSE
-				    color      	0
-				    default_color 	TRUE)
-				label      	(object ItemLabel
-				    Parent_View 	@11
-				    location   	(1344, 1034)
-				    anchor_loc 	1
-				    nlines     	2
-				    max_width  	630
-				    justify    	0
-				    label      	"持久化")
-				icon_style 	"Icon"
-				line_color 	3342489
-				fill_color 	13434879
-				quidu      	"5AB0C0BA0224"
-				height     	118)
-			    (object UseCaseView "Use Case View::系统用例图::数据存储" @12
+			    (object UseCaseView "Use Case View::系统用例图::数据存储" @10
 				location   	(1808, 1136)
 				font       	(object Font
 				    size       	10
@@ -595,7 +572,7 @@
 				    color      	0
 				    default_color 	TRUE)
 				label      	(object ItemLabel
-				    Parent_View 	@12
+				    Parent_View 	@10
 				    location   	(1808, 1274)
 				    anchor_loc 	1
 				    nlines     	2
@@ -607,7 +584,7 @@
 				fill_color 	13434879
 				quidu      	"5AB0C83F026E"
 				height     	118)
-			    (object UseCaseView "Use Case View::系统用例图::数据格式转换" @13
+			    (object UseCaseView "Use Case View::系统用例图::数据格式转换" @11
 				location   	(1936, 784)
 				font       	(object Font
 				    size       	10
@@ -619,7 +596,7 @@
 				    color      	0
 				    default_color 	TRUE)
 				label      	(object ItemLabel
-				    Parent_View 	@13
+				    Parent_View 	@11
 				    location   	(1936, 922)
 				    anchor_loc 	1
 				    nlines     	2
@@ -630,7 +607,7 @@
 				line_color 	3342489
 				fill_color 	13434879
 				quidu      	"5AB0C4E80132")
-			    (object UseCaseView "Use Case View::系统用例图::手工配置Cookie" @14
+			    (object UseCaseView "Use Case View::系统用例图::手工配置Cookie" @12
 				location   	(432, 800)
 				font       	(object Font
 				    size       	10
@@ -642,7 +619,7 @@
 				    color      	0
 				    default_color 	TRUE)
 				label      	(object ItemLabel
-				    Parent_View 	@14
+				    Parent_View 	@12
 				    location   	(432, 938)
 				    anchor_loc 	1
 				    nlines     	2
@@ -654,17 +631,7 @@
 				fill_color 	13434879
 				quidu      	"5AB0EFFB01E2"
 				height     	118)
-			    (object InheritView "" @15
-				stereotype 	TRUE
-				line_color 	3342489
-				quidu      	"5AB0F06C0305"
-				client     	@14
-				supplier   	@10
-				vertices   	(list Points
-				    (478, 741)
-				    (625, 571))
-				line_style 	0)
-			    (object UseCaseView "Use Case View::系统用例图::人工登录" @16
+			    (object UseCaseView "Use Case View::系统用例图::人工登录" @13
 				location   	(224, 1280)
 				font       	(object Font
 				    size       	10
@@ -676,7 +643,7 @@
 				    color      	0
 				    default_color 	TRUE)
 				label      	(object ItemLabel
-				    Parent_View 	@16
+				    Parent_View 	@13
 				    location   	(224, 1418)
 				    anchor_loc 	1
 				    nlines     	2
@@ -688,7 +655,7 @@
 				fill_color 	13434879
 				quidu      	"5AB0F0AC022E"
 				height     	118)
-			    (object UseCaseView "Use Case View::系统用例图::截取Cookie" @17
+			    (object UseCaseView "Use Case View::系统用例图::截取Cookie" @14
 				location   	(480, 1280)
 				font       	(object Font
 				    size       	10
@@ -700,7 +667,7 @@
 				    color      	0
 				    default_color 	TRUE)
 				label      	(object ItemLabel
-				    Parent_View 	@17
+				    Parent_View 	@14
 				    location   	(480, 1418)
 				    anchor_loc 	1
 				    nlines     	2
@@ -712,7 +679,7 @@
 				fill_color 	13434879
 				quidu      	"5AB0F1260399"
 				height     	118)
-			    (object UseCaseView "Use Case View::系统用例图::输入Cookie" @18
+			    (object UseCaseView "Use Case View::系统用例图::输入Cookie" @15
 				location   	(768, 1296)
 				font       	(object Font
 				    size       	10
@@ -724,7 +691,7 @@
 				    color      	0
 				    default_color 	TRUE)
 				label      	(object ItemLabel
-				    Parent_View 	@18
+				    Parent_View 	@15
 				    location   	(768, 1434)
 				    anchor_loc 	1
 				    nlines     	2
@@ -736,37 +703,37 @@
 				fill_color 	13434879
 				quidu      	"5AB0F144005E"
 				height     	118)
-			    (object DependencyView "" @19
+			    (object DependencyView "" @16
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"5AB0F16800EC"
-				client     	@14
-				supplier   	@16
+				client     	@12
+				supplier   	@13
 				vertices   	(list Points
 				    (359, 963)
 				    (245, 1222))
 				line_style 	0)
-			    (object DependencyView "" @20
+			    (object DependencyView "" @17
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"5AB0F16B01A5"
-				client     	@14
-				supplier   	@17
+				client     	@12
+				supplier   	@14
 				vertices   	(list Points
 				    (445, 963)
 				    (472, 1222))
 				line_style 	0)
-			    (object DependencyView "" @21
+			    (object DependencyView "" @18
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"5AB0F16E009C"
-				client     	@14
-				supplier   	@18
+				client     	@12
+				supplier   	@15
 				vertices   	(list Points
 				    (541, 963)
 				    (726, 1237))
 				line_style 	0)
-			    (object UseCaseView "Use Case View::系统用例图::配置数据库" @22
+			    (object UseCaseView "Use Case View::系统用例图::配置数据库" @19
 				location   	(1337, 1280)
 				font       	(object Font
 				    size       	10
@@ -778,7 +745,7 @@
 				    color      	0
 				    default_color 	TRUE)
 				label      	(object ItemLabel
-				    Parent_View 	@22
+				    Parent_View 	@19
 				    location   	(1337, 1418)
 				    anchor_loc 	1
 				    nlines     	2
@@ -790,17 +757,99 @@
 				fill_color 	13434879
 				quidu      	"5AB0F188023F"
 				height     	118)
+			    (object UseCaseView "Use Case View::系统用例图::获取权限" @20
+				location   	(720, 464)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				label      	(object ItemLabel
+				    Parent_View 	@20
+				    location   	(720, 602)
+				    anchor_loc 	1
+				    nlines     	2
+				    max_width  	630
+				    justify    	0
+				    label      	"获取权限")
+				icon_style 	"Icon"
+				line_color 	3342489
+				fill_color 	13434879
+				quidu      	"5AB0C0AA02B8"
+				height     	118)
+			    (object InheritView "" @21
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"5AB0F06C0305"
+				client     	@12
+				supplier   	@20
+				vertices   	(list Points
+				    (478, 741)
+				    (582, 627))
+				line_style 	0)
+			    (object UseCaseView "Use Case View::系统用例图::数据导入" @22
+				location   	(1344, 896)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				label      	(object ItemLabel
+				    Parent_View 	@22
+				    location   	(1344, 1034)
+				    anchor_loc 	1
+				    nlines     	2
+				    max_width  	630
+				    justify    	0
+				    label      	"数据导入")
+				icon_style 	"Icon"
+				line_color 	3342489
+				fill_color 	13434879
+				quidu      	"5AB0C0BA0224"
+				height     	118)
 			    (object InheritView "" @23
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"5AB0F2AA024A"
-				client     	@22
-				supplier   	@11
+				client     	@19
+				supplier   	@22
 				vertices   	(list Points
 				    (1337, 1222)
 				    (1338, 1059))
 				line_style 	0)
-			    (object ClassView "Class" "Use Case View::系统用例图::现场工程师" @24
+			    (object UseCaseView "Use Case View::业务用例图::下载数据" @24
+				location   	(1392, 432)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				label      	(object ItemLabel
+				    Parent_View 	@24
+				    location   	(1392, 570)
+				    anchor_loc 	1
+				    nlines     	2
+				    max_width  	630
+				    justify    	0
+				    label      	"下载数据")
+				icon_style 	"Icon"
+				line_color 	3342489
+				fill_color 	13434879
+				quidu      	"5AB0B91402FA"
+				height     	118)
+			    (object ClassView "Class" "Use Case View::系统用例图::现场工程师" @25
 				ShowCompartmentStereotypes 	TRUE
 				IncludeAttribute 	TRUE
 				IncludeOperation 	TRUE
@@ -815,7 +864,7 @@
 				    color      	0
 				    default_color 	TRUE)
 				label      	(object ItemLabel
-				    Parent_View 	@24
+				    Parent_View 	@25
 				    location   	(928, 1056)
 				    anchor_loc 	1
 				    nlines     	2
@@ -828,7 +877,7 @@
 				quidu      	"5AB0C097016F"
 				annotation 	8
 				autoResize 	TRUE)
-			    (object AssociationViewNew "$UNNAMED$12" @25
+			    (object AssociationViewNew "$UNNAMED$12" @26
 				location   	(842, 721)
 				font       	(object Font
 				    size       	10
@@ -843,31 +892,31 @@
 				line_color 	3342489
 				quidu      	"5AB0C26600C8"
 				roleview_list 	(list RoleViews
-				    (object RoleView "$UNNAMED$13" @26
-					Parent_View 	@25
+				    (object RoleView "$UNNAMED$13" @27
+					Parent_View 	@26
 					location   	(-70, -15)
 					stereotype 	TRUE
 					line_color 	3342489
 					quidu      	"5AB0C26602D3"
-					client     	@25
-					supplier   	@10
+					client     	@26
+					supplier   	@20
 					vertices   	(list Points
 					    (842, 721)
-					    (797, 627))
+					    (796, 627))
 					line_style 	0)
-				    (object RoleView "$UNNAMED$14" @27
-					Parent_View 	@25
+				    (object RoleView "$UNNAMED$14" @28
+					Parent_View 	@26
 					location   	(-70, -15)
 					stereotype 	TRUE
 					line_color 	3342489
 					quidu      	"5AB0C26602D5"
-					client     	@25
-					supplier   	@24
+					client     	@26
+					supplier   	@25
 					vertices   	(list Points
 					    (842, 721)
-					    (888, 816))
+					    (887, 816))
 					line_style 	0)))
-			    (object AssociationViewNew "$UNNAMED$15" @28
+			    (object AssociationViewNew "$UNNAMED$15" @29
 				location   	(1108, 896)
 				font       	(object Font
 				    size       	10
@@ -882,54 +931,30 @@
 				line_color 	3342489
 				quidu      	"5AB0C26B00A5"
 				roleview_list 	(list RoleViews
-				    (object RoleView "$UNNAMED$16" @29
-					Parent_View 	@28
+				    (object RoleView "$UNNAMED$16" @30
+					Parent_View 	@29
 					location   	(196, 160)
 					stereotype 	TRUE
 					line_color 	3342489
 					quidu      	"5AB0C26B018B"
-					client     	@28
-					supplier   	@11
+					client     	@29
+					supplier   	@22
 					vertices   	(list Points
 					    (1108, 896)
-					    (1232, 896))
+					    (1234, 896))
 					line_style 	0)
-				    (object RoleView "$UNNAMED$17" @30
-					Parent_View 	@28
+				    (object RoleView "$UNNAMED$17" @31
+					Parent_View 	@29
 					location   	(196, 160)
 					stereotype 	TRUE
 					line_color 	3342489
 					quidu      	"5AB0C26B018D"
-					client     	@28
-					supplier   	@24
+					client     	@29
+					supplier   	@25
 					vertices   	(list Points
 					    (1108, 896)
 					    (985, 896))
 					line_style 	0)))
-			    (object UseCaseView "Use Case View::业务用例图::下载数据" @31
-				location   	(1392, 432)
-				font       	(object Font
-				    size       	10
-				    face       	"Arial"
-				    bold       	FALSE
-				    italics    	FALSE
-				    underline  	FALSE
-				    strike     	FALSE
-				    color      	0
-				    default_color 	TRUE)
-				label      	(object ItemLabel
-				    Parent_View 	@31
-				    location   	(1392, 570)
-				    anchor_loc 	1
-				    nlines     	2
-				    max_width  	630
-				    justify    	0
-				    label      	"下载数据")
-				icon_style 	"Icon"
-				line_color 	3342489
-				fill_color 	13434879
-				quidu      	"5AB0B91402FA"
-				height     	118)
 			    (object AssociationViewNew "$UNNAMED$24" @32
 				location   	(1140, 676)
 				font       	(object Font
@@ -952,10 +977,10 @@
 					line_color 	3342489
 					quidu      	"5AB0F65D002F"
 					client     	@32
-					supplier   	@31
+					supplier   	@24
 					vertices   	(list Points
 					    (1140, 676)
-					    (1296, 519))
+					    (1225, 595))
 					line_style 	0)
 				    (object RoleView "$UNNAMED$26" @34
 					Parent_View 	@32
@@ -964,7 +989,7 @@
 					line_color 	3342489
 					quidu      	"5AB0F65D0031"
 					client     	@32
-					supplier   	@24
+					supplier   	@25
 					vertices   	(list Points
 					    (1140, 676)
 					    (985, 834))
@@ -1045,27 +1070,27 @@
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"5AB0F93B0356"
-				client     	@12
-				supplier   	@11
+				client     	@10
+				supplier   	@22
 				vertices   	(list Points
-				    (1698, 1079)
-				    (1452, 950))
+				    (1808, 1136)
+				    (1344, 896))
 				line_style 	0)
 			    (object DependencyView "" @39
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"5AB0F9450075"
-				client     	@31
+				client     	@24
 				supplier   	@35
 				vertices   	(list Points
 				    (1458, 374)
-				    (1591, 270))
+				    (1526, 323))
 				line_style 	0)
 			    (object DependencyView "" @40
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"5AB0F94600C7"
-				client     	@31
+				client     	@24
 				supplier   	@36
 				vertices   	(list Points
 				    (1500, 411)
@@ -1075,20 +1100,20 @@
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"5AB0F9480245"
-				client     	@31
+				client     	@24
 				supplier   	@37
 				vertices   	(list Points
-				    (1500, 450)
+				    (1712, 493)
 				    (1922, 535))
 				line_style 	0)
 			    (object DependencyView "" @42
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"5AB0F94A005D"
-				client     	@31
-				supplier   	@13
+				client     	@24
+				supplier   	@11
 				vertices   	(list Points
-				    (1484, 490)
+				    (1646, 595)
 				    (1845, 725))
 				line_style 	0)))
 		    (object UseCaseDiagram "数据迁移系统用例图"
@@ -1101,7 +1126,7 @@
 			origin_y   	0
 			items      	(list diagram_item_list
 			    (object UseCaseView "Use Case View::系统用例图::获取源数据库数据" @43
-				location   	(1568, 736)
+				location   	(1584, 672)
 				font       	(object Font
 				    size       	10
 				    face       	"Arial"
@@ -1113,7 +1138,7 @@
 				    default_color 	TRUE)
 				label      	(object ItemLabel
 				    Parent_View 	@43
-				    location   	(1568, 874)
+				    location   	(1584, 810)
 				    anchor_loc 	1
 				    nlines     	2
 				    max_width  	630
@@ -1125,7 +1150,7 @@
 				quidu      	"5AB0C4DA00CB"
 				height     	118)
 			    (object UseCaseView "Use Case View::系统用例图::数据格式转换" @44
-				location   	(1552, 1040)
+				location   	(1568, 1056)
 				font       	(object Font
 				    size       	10
 				    face       	"Arial"
@@ -1137,7 +1162,7 @@
 				    default_color 	TRUE)
 				label      	(object ItemLabel
 				    Parent_View 	@44
-				    location   	(1552, 1178)
+				    location   	(1568, 1194)
 				    anchor_loc 	1
 				    nlines     	2
 				    max_width  	630
@@ -1148,8 +1173,8 @@
 				fill_color 	13434879
 				quidu      	"5AB0C4E80132"
 				height     	118)
-			    (object UseCaseView "Use Case View::系统用例图::配置源数据库" @45
-				location   	(240, 272)
+			    (object UseCaseView "Use Case View::系统用例图::配置目标数据库" @45
+				location   	(208, 672)
 				font       	(object Font
 				    size       	10
 				    face       	"Arial"
@@ -1161,19 +1186,19 @@
 				    default_color 	TRUE)
 				label      	(object ItemLabel
 				    Parent_View 	@45
-				    location   	(240, 410)
+				    location   	(208, 810)
 				    anchor_loc 	1
 				    nlines     	2
 				    max_width  	630
 				    justify    	0
-				    label      	"配置源数据库")
+				    label      	"配置目标数据库")
 				icon_style 	"Icon"
 				line_color 	3342489
 				fill_color 	13434879
-				quidu      	"5AB0FA8E0370"
+				quidu      	"5AB0C254003A"
 				height     	118)
-			    (object UseCaseView "Use Case View::系统用例图::配置目标数据库" @46
-				location   	(272, 720)
+			    (object UseCaseView "Use Case View::系统用例图::数据存储" @46
+				location   	(1088, 448)
 				font       	(object Font
 				    size       	10
 				    face       	"Arial"
@@ -1185,19 +1210,19 @@
 				    default_color 	TRUE)
 				label      	(object ItemLabel
 				    Parent_View 	@46
-				    location   	(272, 858)
+				    location   	(1088, 586)
 				    anchor_loc 	1
 				    nlines     	2
 				    max_width  	630
 				    justify    	0
-				    label      	"配置目标数据库")
+				    label      	"数据存储")
 				icon_style 	"Icon"
 				line_color 	3342489
 				fill_color 	13434879
-				quidu      	"5AB0C254003A"
+				quidu      	"5AB0C83F026E"
 				height     	118)
-			    (object UseCaseView "Use Case View::系统用例图::持久化" @47
-				location   	(656, 448)
+			    (object UseCaseView "Use Case View::系统用例图::数据迁移" @47
+				location   	(1120, 864)
 				font       	(object Font
 				    size       	10
 				    face       	"Arial"
@@ -1209,38 +1234,62 @@
 				    default_color 	TRUE)
 				label      	(object ItemLabel
 				    Parent_View 	@47
-				    location   	(656, 586)
+				    location   	(1120, 1002)
 				    anchor_loc 	1
 				    nlines     	2
 				    max_width  	630
 				    justify    	0
-				    label      	"持久化")
+				    label      	"数据迁移")
+				icon_style 	"Icon"
+				line_color 	3342489
+				fill_color 	13434879
+				quidu      	"5AB0FAD00298"
+				height     	118)
+			    (object DependencyView "" @48
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"5AB0FB24005C"
+				client     	@47
+				supplier   	@43
+				vertices   	(list Points
+				    (1120, 864)
+				    (1584, 672))
+				line_style 	0)
+			    (object DependencyView "" @49
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"5AB0FB2602EB"
+				client     	@47
+				supplier   	@44
+				vertices   	(list Points
+				    (1120, 864)
+				    (1568, 1056))
+				line_style 	0)
+			    (object UseCaseView "Use Case View::系统用例图::数据导入" @50
+				location   	(672, 432)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				label      	(object ItemLabel
+				    Parent_View 	@50
+				    location   	(672, 570)
+				    anchor_loc 	1
+				    nlines     	2
+				    max_width  	630
+				    justify    	0
+				    label      	"数据导入")
 				icon_style 	"Icon"
 				line_color 	3342489
 				fill_color 	13434879
 				quidu      	"5AB0C0BA0224"
 				height     	118)
-			    (object InheritView "" @48
-				stereotype 	TRUE
-				line_color 	3342489
-				quidu      	"5AB0FAB30204"
-				client     	@45
-				supplier   	@47
-				vertices   	(list Points
-				    (376, 328)
-				    (544, 399))
-				line_style 	0)
-			    (object InheritView "" @49
-				stereotype 	TRUE
-				line_color 	3342489
-				quidu      	"5AB0FAB80104"
-				client     	@46
-				supplier   	@47
-				vertices   	(list Points
-				    (348, 662)
-				    (572, 504))
-				line_style 	0)
-			    (object ClassView "Class" "Use Case View::系统用例图::现场工程师" @50
+			    (object ClassView "Class" "Use Case View::系统用例图::现场工程师" @51
 				ShowCompartmentStereotypes 	TRUE
 				IncludeAttribute 	TRUE
 				IncludeOperation 	TRUE
@@ -1255,11 +1304,11 @@
 				    color      	0
 				    default_color 	TRUE)
 				label      	(object ItemLabel
-				    Parent_View 	@50
+				    Parent_View 	@51
 				    location   	(669, 1024)
 				    anchor_loc 	1
 				    nlines     	2
-				    max_width  	343
+				    max_width  	325
 				    justify    	0
 				    label      	"现场工程师")
 				icon       	"Actor"
@@ -1268,70 +1317,7 @@
 				quidu      	"5AB0C097016F"
 				annotation 	8
 				autoResize 	TRUE)
-			    (object AssociationViewNew "$UNNAMED$27" @51
-				location   	(661, 697)
-				font       	(object Font
-				    size       	10
-				    face       	"Arial"
-				    bold       	FALSE
-				    italics    	FALSE
-				    underline  	FALSE
-				    strike     	FALSE
-				    color      	0
-				    default_color 	TRUE)
-				stereotype 	TRUE
-				line_color 	3342489
-				quidu      	"5AB0FABD0346"
-				roleview_list 	(list RoleViews
-				    (object RoleView "$UNNAMED$28" @52
-					Parent_View 	@51
-					location   	(-59, -119)
-					stereotype 	TRUE
-					line_color 	3342489
-					quidu      	"5AB0FABE014B"
-					client     	@51
-					supplier   	@47
-					vertices   	(list Points
-					    (661, 697)
-					    (659, 611))
-					line_style 	0)
-				    (object RoleView "$UNNAMED$29" @53
-					Parent_View 	@51
-					location   	(-59, -119)
-					stereotype 	TRUE
-					line_color 	3342489
-					quidu      	"5AB0FABE0151"
-					client     	@51
-					supplier   	@50
-					vertices   	(list Points
-					    (661, 697)
-					    (664, 784))
-					line_style 	0)))
-			    (object UseCaseView "Use Case View::系统用例图::数据迁移" @54
-				location   	(1120, 864)
-				font       	(object Font
-				    size       	10
-				    face       	"Arial"
-				    bold       	FALSE
-				    italics    	FALSE
-				    underline  	FALSE
-				    strike     	FALSE
-				    color      	0
-				    default_color 	TRUE)
-				label      	(object ItemLabel
-				    Parent_View 	@54
-				    location   	(1120, 1002)
-				    anchor_loc 	1
-				    nlines     	2
-				    max_width  	630
-				    justify    	0
-				    label      	"数据迁移")
-				icon_style 	"Icon"
-				line_color 	3342489
-				fill_color 	13434879
-				quidu      	"5AB0FAD00298"
-				height     	118)
-			    (object AssociationViewNew "$UNNAMED$30" @55
+			    (object AssociationViewNew "$UNNAMED$30" @52
 				location   	(868, 864)
 				font       	(object Font
 				    size       	10
@@ -1346,32 +1332,71 @@
 				line_color 	3342489
 				quidu      	"5AB0FAD901E7"
 				roleview_list 	(list RoleViews
-				    (object RoleView "$UNNAMED$31" @56
-					Parent_View 	@55
+				    (object RoleView "$UNNAMED$31" @53
+					Parent_View 	@52
 					location   	(196, 0)
 					stereotype 	TRUE
 					line_color 	3342489
 					quidu      	"5AB0FAD903DD"
-					client     	@55
-					supplier   	@54
+					client     	@52
+					supplier   	@47
 					vertices   	(list Points
 					    (868, 864)
 					    (1010, 864))
 					line_style 	0)
-				    (object RoleView "$UNNAMED$32" @57
-					Parent_View 	@55
+				    (object RoleView "$UNNAMED$32" @54
+					Parent_View 	@52
 					location   	(196, 0)
 					stereotype 	TRUE
 					line_color 	3342489
 					quidu      	"5AB0FAD903E0"
-					client     	@55
-					supplier   	@50
+					client     	@52
+					supplier   	@51
 					vertices   	(list Points
 					    (868, 864)
 					    (726, 864))
 					line_style 	0)))
-			    (object UseCaseView "Use Case View::系统用例图::数据存储" @58
-				location   	(1088, 448)
+			    (object AssociationViewNew "$UNNAMED$27" @55
+				location   	(668, 689)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"5AB0FABD0346"
+				roleview_list 	(list RoleViews
+				    (object RoleView "$UNNAMED$28" @56
+					Parent_View 	@55
+					location   	(-52, -127)
+					stereotype 	TRUE
+					line_color 	3342489
+					quidu      	"5AB0FABE014B"
+					client     	@55
+					supplier   	@50
+					vertices   	(list Points
+					    (668, 689)
+					    (668, 595))
+					line_style 	0)
+				    (object RoleView "$UNNAMED$29" @57
+					Parent_View 	@55
+					location   	(-52, -127)
+					stereotype 	TRUE
+					line_color 	3342489
+					quidu      	"5AB0FABE0151"
+					client     	@55
+					supplier   	@51
+					vertices   	(list Points
+					    (668, 689)
+					    (667, 784))
+					line_style 	0)))
+			    (object UseCaseView "Use Case View::系统用例图::配置源数据库" @58
+				location   	(192, 272)
 				font       	(object Font
 				    size       	10
 				    face       	"Arial"
@@ -1383,46 +1408,46 @@
 				    default_color 	TRUE)
 				label      	(object ItemLabel
 				    Parent_View 	@58
-				    location   	(1088, 586)
+				    location   	(192, 410)
 				    anchor_loc 	1
 				    nlines     	2
 				    max_width  	630
 				    justify    	0
-				    label      	"数据存储")
+				    label      	"配置源数据库")
 				icon_style 	"Icon"
 				line_color 	3342489
 				fill_color 	13434879
-				quidu      	"5AB0C83F026E"
+				quidu      	"5AB0FA8E0370"
 				height     	118)
 			    (object DependencyView "" @59
 				stereotype 	TRUE
 				line_color 	3342489
-				quidu      	"5AB0FB24005C"
-				client     	@54
-				supplier   	@43
+				quidu      	"5AB23C060321"
+				client     	@50
+				supplier   	@58
 				vertices   	(list Points
-				    (1228, 829)
-				    (1458, 764))
+				    (672, 432)
+				    (192, 272))
 				line_style 	0)
 			    (object DependencyView "" @60
 				stereotype 	TRUE
 				line_color 	3342489
-				quidu      	"5AB0FB2602EB"
-				client     	@54
-				supplier   	@44
+				quidu      	"5AB23C080051"
+				client     	@50
+				supplier   	@45
 				vertices   	(list Points
-				    (1228, 906)
-				    (1441, 993))
+				    (672, 432)
+				    (208, 672))
 				line_style 	0)
-			    (object InheritView "" @61
+			    (object DependencyView "" @61
 				stereotype 	TRUE
 				line_color 	3342489
-				quidu      	"5AB0F93B0356"
-				client     	@58
-				supplier   	@47
+				quidu      	"5AB23C0900C1"
+				client     	@50
+				supplier   	@46
 				vertices   	(list Points
-				    (977, 448)
-				    (764, 448))
+				    (780, 434)
+				    (976, 441))
 				line_style 	0)))))
 	    (object Class_Category "流程图"
 		quid       	"5AB0D06802C9"
@@ -1435,10 +1460,10 @@
 			statemachine 	(object State_Machine "State/Activity Model2"
 			    quid       	"5AB0D89F02F4"
 			    states     	(list States
-				(object State "$UNNAMED$33"
+				(object State "$UNNAMED$36"
 				    quid       	"5AB0D8AC024E"
 				    type       	"StartState")
-				(object State "$UNNAMED$34"
+				(object State "$UNNAMED$37"
 				    quid       	"5AB0D8AE0257"
 				    type       	"EndState")
 				(object ActivityState "配置数据库信息"
@@ -1466,7 +1491,7 @@
 				    quid       	"5AB0D9B800A8"
 				    supplier   	"Use Case View::流程图::迁移::State/Activity Model2::配置数据库信息"
 				    supplier_quidu 	"5AB0D9940239"
-				    client     	"$UNNAMED$33"
+				    client     	"$UNNAMED$36"
 				    client_quidu 	"5AB0D8AC024E"
 				    sendEvent  	(object sendEvent
 					quid       	"5AB0D9B800AB"))
@@ -1507,7 +1532,7 @@
 					quid       	"5AB0DC460371"))
 				(object State_Transition
 				    quid       	"5AB0DC4702C4"
-				    supplier   	"$UNNAMED$34"
+				    supplier   	"$UNNAMED$37"
 				    supplier_quidu 	"5AB0D8AE0257"
 				    client     	"Use Case View::流程图::迁移::State/Activity Model2::数据存储"
 				    client_quidu 	"5AB0D9FF0280"
@@ -1556,7 +1581,7 @@
 					quid       	"5AB0DD030279"))
 				(object State_Transition
 				    quid       	"5AB0DD43027C"
-				    supplier   	"$UNNAMED$34"
+				    supplier   	"$UNNAMED$37"
 				    supplier_quidu 	"5AB0D8AE0257"
 				    client     	"Use Case View::流程图::迁移::State/Activity Model2::成功提示"
 				    client_quidu 	"5AB0DC90015D"
@@ -1564,7 +1589,7 @@
 					quid       	"5AB0DD43027F"))
 				(object State_Transition
 				    quid       	"5AB0DD4C0294"
-				    supplier   	"$UNNAMED$34"
+				    supplier   	"$UNNAMED$37"
 				    supplier_quidu 	"5AB0D8AE0257"
 				    client     	"Use Case View::流程图::迁移::State/Activity Model2::错误提示"
 				    client_quidu 	"5AB0DC8001FE"
@@ -1572,7 +1597,7 @@
 					quid       	"5AB0DD4C0297"))
 				(object State_Transition
 				    quid       	"5AB0DD680234"
-				    supplier   	"$UNNAMED$34"
+				    supplier   	"$UNNAMED$37"
 				    supplier_quidu 	"5AB0D8AE0257"
 				    client     	"Use Case View::流程图::迁移::State/Activity Model2::错误提示"
 				    client_quidu 	"5AB0DC8001FE"
@@ -1592,7 +1617,7 @@
 					(object Swimlane "" @62
 					    line_color 	3342489
 					    width      	450)
-					(object StateView "StartState" "$UNNAMED$33" @63
+					(object StateView "StartState" "$UNNAMED$36" @63
 					    Parent_View 	@62
 					    location   	(624, 64)
 					    icon_style 	"Icon"
@@ -1796,7 +1821,7 @@
 						(624, 1051))
 					    line_style 	0
 					    x_offset   	FALSE)
-					(object StateView "EndState" "$UNNAMED$34" @74
+					(object StateView "EndState" "$UNNAMED$37" @74
 					    Parent_View 	@62
 					    location   	(624, 1761)
 					    icon_style 	"Icon"
@@ -2134,10 +2159,10 @@
 		statemachine 	(object State_Machine "State/Activity Model"
 		    quid       	"5AB0D07F023F"
 		    states     	(list States
-			(object State "$UNNAMED$35"
+			(object State "$UNNAMED$38"
 			    quid       	"5AB0D22801BC"
 			    type       	"StartState")
-			(object State "$UNNAMED$36"
+			(object State "$UNNAMED$39"
 			    quid       	"5AB0D22B003B"
 			    type       	"EndState")
 			(object ActivityState "人工登录"
@@ -2173,7 +2198,7 @@
 			    quid       	"5AB0D2720026"
 			    supplier   	"Use Case View::流程图::State/Activity Model::人工登录"
 			    supplier_quidu 	"5AB0D2490097"
-			    client     	"$UNNAMED$35"
+			    client     	"$UNNAMED$38"
 			    client_quidu 	"5AB0D22801BC"
 			    sendEvent  	(object sendEvent
 				quid       	"5AB0D2720029"))
@@ -2225,7 +2250,7 @@
 				quid       	"5AB0D59101FE"))
 			(object State_Transition
 			    quid       	"5AB0D5B90353"
-			    supplier   	"$UNNAMED$36"
+			    supplier   	"$UNNAMED$39"
 			    supplier_quidu 	"5AB0D22B003B"
 			    client     	"Use Case View::流程图::State/Activity Model::提示错误"
 			    client_quidu 	"5AB0D58D011D"
@@ -2263,7 +2288,7 @@
 				quid       	"5AB0D677021F"))
 			(object State_Transition
 			    quid       	"5AB0D68A03A4"
-			    supplier   	"$UNNAMED$36"
+			    supplier   	"$UNNAMED$39"
 			    supplier_quidu 	"5AB0D22B003B"
 			    client     	"Use Case View::流程图::State/Activity Model::提示用户存储完毕"
 			    client_quidu 	"5AB0D5F0027D"
@@ -2327,7 +2352,7 @@
 				quid       	"5AB0FBD003CF"))
 			(object State_Transition
 			    quid       	"5AB0FC490144"
-			    supplier   	"$UNNAMED$36"
+			    supplier   	"$UNNAMED$39"
 			    supplier_quidu 	"5AB0D22B003B"
 			    client     	"Use Case View::流程图::State/Activity Model::提示错误"
 			    client_quidu 	"5AB0D58D011D"
@@ -2347,14 +2372,14 @@
 				(object Swimlane "" @92
 				    line_color 	3342489
 				    width      	450)
-				(object StateView "StartState" "$UNNAMED$35" @93
+				(object StateView "StartState" "$UNNAMED$38" @93
 				    Parent_View 	@92
 				    location   	(608, 96)
 				    icon_style 	"Icon"
 				    line_color 	3342489
 				    quidu      	"5AB0D22801BC"
 				    autoResize 	TRUE)
-				(object StateView "EndState" "$UNNAMED$36" @94
+				(object StateView "EndState" "$UNNAMED$39" @94
 				    Parent_View 	@92
 				    location   	(609, 2529)
 				    icon_style 	"Icon"
@@ -3014,7 +3039,968 @@
 					(651, 2529))
 				    line_style 	0
 				    x_offset   	FALSE)))))
-		logical_presentations 	(list unit_reference_list)))
+		logical_presentations 	(list unit_reference_list))
+	    (object Class_Category "类图"
+		quid       	"5AB2446101B3"
+		exportControl 	"Public"
+		logical_models 	(list unit_reference_list
+		    (object Class "DBConfig"
+			quid       	"5AB244A502FF"
+			operations 	(list Operations
+			    (object Operation "SaveConfig"
+				quid       	"5AB315AB0209"
+				concurrency 	"Sequential"
+				opExportControl 	"Public"
+				uid        	0)
+			    (object Operation "GetConfig"
+				quid       	"5AB315E8039E"
+				concurrency 	"Sequential"
+				opExportControl 	"Public"
+				uid        	0))
+			class_attributes 	(list class_attribute_list
+			    (object ClassAttribute "DBString"
+				quid       	"5AB275F800D7"
+				type       	"String"
+				quidu      	"39CD6AE1011A")))
+		    (object Class "BLL"
+			quid       	"5AB26DFF020E"
+			superclasses 	(list inheritance_relationship_list
+			    (object Inheritance_Relationship
+				quid       	"5AB312BF012F"
+				supplier   	"Use Case View::类图:: BLL"
+				quidu      	"5AB289B603BB"))
+			used_nodes 	(list uses_relationship_list
+			    (object Uses_Relationship
+				quid       	"5AB277530152"
+				supplier   	"Use Case View::类图::MQHelper"
+				quidu      	"5AB270390181")
+			    (object Uses_Relationship
+				quid       	"5AB277540344"
+				supplier   	"Use Case View::类图::DBConfig"
+				quidu      	"5AB244A502FF")
+			    (object Uses_Relationship
+				quid       	"5AB279A90130"
+				supplier   	"Use Case View::类图::Common"
+				quidu      	"5AB2777101A1")
+			    (object Uses_Relationship
+				quid       	"5AB279DC0066"
+				supplier   	"Use Case View::类图::DAL"
+				quidu      	"5AB27775012A")
+			    (object Uses_Relationship
+				quid       	"5AB285AD0367"
+				supplier   	"Use Case View::类图::通用方法类"
+				quidu      	"5AB2840A007B")
+			    (object Uses_Relationship
+				quid       	"5AB289FC01E6"
+				supplier   	"Use Case View::类图:: DAL"
+				quidu      	"5AB289BC0382"))
+			realized_interfaces 	(list realize_rel_list
+			    (object Realize_Relationship
+				quid       	"5AB275AF002D"
+				supplier   	"Use Case View::类图::BLL接口"
+				quidu      	"5AB271A202F5")
+			    (object Realize_Relationship
+				quid       	"5AB289F6024E"
+				supplier   	"Use Case View::类图:: BLL"
+				quidu      	"5AB289B603BB"))
+			operations 	(list Operations
+			    (object Operation "写入消息队列"
+				quid       	"5AB276B00261"
+				concurrency 	"Sequential"
+				opExportControl 	"Public"
+				uid        	0)))
+		    (object Class "MQHelper"
+			quid       	"5AB270390181"
+			operations 	(list Operations
+			    (object Operation "Receive"
+				quid       	"5AB27747038A"
+				concurrency 	"Sequential"
+				opExportControl 	"Public"
+				uid        	0)
+			    (object Operation "Send"
+				quid       	"5AB313D401F9"
+				parameters 	(list Parameters
+				    (object Parameter "message"
+					quid       	"5AB3142500B8"
+					type       	"String"
+					quidu      	"39CD6AE1011A"))
+				concurrency 	"Sequential"
+				opExportControl 	"Public"
+				uid        	0)))
+		    (object Class "BLL接口"
+			quid       	"5AB271A202F5"
+			stereotype 	"Interface"
+			operations 	(list Operations
+			    (object Operation "下载患者列表"
+				quid       	"5AB2751F033E"
+				concurrency 	"Sequential"
+				opExportControl 	"Public"
+				uid        	0)
+			    (object Operation "下载患者病历"
+				quid       	"5AB275280086"
+				concurrency 	"Sequential"
+				opExportControl 	"Public"
+				uid        	0)
+			    (object Operation "存储患者列表"
+				quid       	"5AB275330226"
+				concurrency 	"Sequential"
+				opExportControl 	"Public"
+				uid        	0)
+			    (object Operation "存储患者病历"
+				quid       	"5AB2753C006A"
+				concurrency 	"Sequential"
+				opExportControl 	"Public"
+				uid        	0)))
+		    (object Class "Common"
+			quid       	"5AB2777101A1"
+			operations 	(list Operations
+			    (object Operation "JSONParse"
+				quid       	"5AB27782006A"
+				concurrency 	"Sequential"
+				opExportControl 	"Public"
+				uid        	0)))
+		    (object Class "DAL"
+			quid       	"5AB27775012A"
+			superclasses 	(list inheritance_relationship_list
+			    (object Inheritance_Relationship
+				quid       	"5AB312A40327"
+				supplier   	"Use Case View::类图:: DAL"
+				quidu      	"5AB289BC0382"))
+			realized_interfaces 	(list realize_rel_list
+			    (object Realize_Relationship
+				quid       	"5AB277C70354"
+				supplier   	"Use Case View::类图::DAL接口"
+				quidu      	"5AB2778E01ED")
+			    (object Realize_Relationship
+				quid       	"5AB289F70303"
+				supplier   	"Use Case View::类图:: DAL"
+				quidu      	"5AB289BC0382")))
+		    (object Class "DAL接口"
+			quid       	"5AB2778E01ED"
+			stereotype 	"Interface"
+			operations 	(list Operations
+			    (object Operation "存储患者列表"
+				quid       	"5AB277A10359"
+				concurrency 	"Sequential"
+				opExportControl 	"Public"
+				uid        	0)
+			    (object Operation "存储患者病历"
+				quid       	"5AB277A903AA"
+				concurrency 	"Sequential"
+				opExportControl 	"Public"
+				uid        	0)))
+		    (object Class "通用方法类"
+			quid       	"5AB2840A007B"
+			operations 	(list Operations
+			    (object Operation "格式转换"
+				quid       	"5AB2851E02E1"
+				concurrency 	"Sequential"
+				opExportControl 	"Public"
+				uid        	0)
+			    (object Operation "字段匹配"
+				quid       	"5AB28529008C"
+				concurrency 	"Sequential"
+				opExportControl 	"Public"
+				uid        	0)))
+		    (object Class "NewClass2"
+			quid       	"5AB28412006A")
+		    (object Class " BLL"
+			quid       	"5AB289B603BB"
+			stereotype 	"Interface"
+			exportControl 	"Protected"
+			operations 	(list Operations
+			    (object Operation "数据迁移"
+				quid       	"5AB289D70010"
+				concurrency 	"Sequential"
+				opExportControl 	"Public"
+				uid        	0)))
+		    (object Class " DAL"
+			quid       	"5AB289BC0382"
+			stereotype 	"Interface"
+			operations 	(list Operations
+			    (object Operation "获取患者病历"
+				quid       	"5AB289E00350"
+				concurrency 	"Sequential"
+				opExportControl 	"Public"
+				uid        	0)
+			    (object Operation "存储患者病历"
+				quid       	"5AB289EC0101"
+				concurrency 	"Sequential"
+				opExportControl 	"Public"
+				uid        	0))))
+		logical_presentations 	(list unit_reference_list
+		    (object ClassDiagram "下载"
+			quid       	"5AB2446A0291"
+			title      	"下载"
+			zoom       	100
+			max_height 	28350
+			max_width  	21600
+			origin_x   	0
+			origin_y   	0
+			items      	(list diagram_item_list
+			    (object ClassView "Class" "Use Case View::类图::DBConfig" @129
+				ShowCompartmentStereotypes 	TRUE
+				IncludeAttribute 	TRUE
+				IncludeOperation 	TRUE
+				location   	(352, 320)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				label      	(object ItemLabel
+				    Parent_View 	@129
+				    location   	(174, 189)
+				    fill_color 	13434879
+				    nlines     	1
+				    max_width  	356
+				    justify    	0
+				    label      	"DBConfig")
+				icon_style 	"Icon"
+				line_color 	3342489
+				fill_color 	13434879
+				quidu      	"5AB244A502FF"
+				compartment 	(object Compartment
+				    Parent_View 	@129
+				    location   	(174, 250)
+				    font       	(object Font
+					size       	10
+					face       	"Arial"
+					bold       	FALSE
+					italics    	FALSE
+					underline  	FALSE
+					strike     	FALSE
+					color      	0
+					default_color 	TRUE)
+				    icon_style 	"Icon"
+				    fill_color 	13434879
+				    anchor     	2
+				    nlines     	4
+				    max_width  	353
+				    justify    	1)
+				width      	374
+				height     	286
+				annotation 	8
+				autoResize 	TRUE)
+			    (object ClassView "Class" "Use Case View::类图::BLL" @130
+				ShowCompartmentStereotypes 	TRUE
+				IncludeAttribute 	TRUE
+				IncludeOperation 	TRUE
+				location   	(1056, 352)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				label      	(object ItemLabel
+				    Parent_View 	@130
+				    location   	(878, 255)
+				    fill_color 	13434879
+				    nlines     	1
+				    max_width  	357
+				    justify    	0
+				    label      	"BLL")
+				icon_style 	"Icon"
+				line_color 	3342489
+				fill_color 	13434879
+				quidu      	"5AB26DFF020E"
+				compartment 	(object Compartment
+				    Parent_View 	@130
+				    location   	(878, 316)
+				    font       	(object Font
+					size       	10
+					face       	"Arial"
+					bold       	FALSE
+					italics    	FALSE
+					underline  	FALSE
+					strike     	FALSE
+					color      	0
+					default_color 	TRUE)
+				    icon_style 	"Icon"
+				    fill_color 	13434879
+				    anchor     	2
+				    nlines     	2
+				    max_width  	384
+				    justify    	1)
+				width      	375
+				height     	219
+				annotation 	8
+				autoResize 	TRUE)
+			    (object ClassView "Class" "Use Case View::类图::MQHelper" @131
+				ShowCompartmentStereotypes 	TRUE
+				IncludeAttribute 	TRUE
+				IncludeOperation 	TRUE
+				location   	(1856, 320)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				label      	(object ItemLabel
+				    Parent_View 	@131
+				    location   	(1728, 204)
+				    fill_color 	13434879
+				    nlines     	1
+				    max_width  	257
+				    justify    	0
+				    label      	"MQHelper")
+				icon_style 	"Icon"
+				line_color 	3342489
+				fill_color 	13434879
+				quidu      	"5AB270390181"
+				compartment 	(object Compartment
+				    Parent_View 	@131
+				    location   	(1728, 265)
+				    font       	(object Font
+					size       	10
+					face       	"Arial"
+					bold       	FALSE
+					italics    	FALSE
+					underline  	FALSE
+					strike     	FALSE
+					color      	0
+					default_color 	TRUE)
+				    icon_style 	"Icon"
+				    fill_color 	13434879
+				    anchor     	2
+				    nlines     	3
+				    max_width  	225
+				    justify    	1)
+				width      	275
+				height     	256
+				annotation 	8
+				autoResize 	TRUE)
+			    (object ClassView "Class" "Use Case View::类图::BLL接口" @132
+				ShowCompartmentStereotypes 	TRUE
+				IncludeAttribute 	TRUE
+				IncludeOperation 	TRUE
+				location   	(480, 704)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				label      	(object ItemLabel
+				    Parent_View 	@132
+				    location   	(479, 812)
+				    anchor_loc 	1
+				    nlines     	2
+				    max_width  	226
+				    justify    	0
+				    label      	"BLL接口")
+				icon       	"Interface"
+				icon_style 	"Icon"
+				line_color 	3342489
+				fill_color 	13434879
+				quidu      	"5AB271A202F5"
+				compartment 	(object Compartment
+				    Parent_View 	@132
+				    location   	(286, 853)
+				    font       	(object Font
+					size       	10
+					face       	"Arial"
+					bold       	FALSE
+					italics    	FALSE
+					underline  	FALSE
+					strike     	FALSE
+					color      	0
+					default_color 	TRUE)
+				    icon_style 	"Icon"
+				    anchor     	2
+				    nlines     	5
+				    max_width  	337
+				    justify    	0)
+				width      	58
+				height     	58
+				annotation 	8
+				autoResize 	TRUE)
+			    (object RealizeView "" @133
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"5AB275AF002D"
+				client     	@130
+				supplier   	@132
+				vertices   	(list Points
+				    (877, 461)
+				    (506, 684))
+				line_style 	0)
+			    (object UsesView "" @134
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"5AB277530152"
+				client     	@130
+				supplier   	@131
+				vertices   	(list Points
+				    (1243, 344)
+				    (1718, 325))
+				line_style 	0)
+			    (object UsesView "" @135
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"5AB277540344"
+				client     	@130
+				supplier   	@129
+				vertices   	(list Points
+				    (868, 343)
+				    (539, 328))
+				line_style 	0)
+			    (object ClassView "Class" "Use Case View::类图::Common" @136
+				ShowCompartmentStereotypes 	TRUE
+				IncludeAttribute 	TRUE
+				IncludeOperation 	TRUE
+				location   	(1600, 640)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				label      	(object ItemLabel
+				    Parent_View 	@136
+				    location   	(1455, 559)
+				    fill_color 	13434879
+				    nlines     	1
+				    max_width  	290
+				    justify    	0
+				    label      	"Common")
+				icon_style 	"Icon"
+				line_color 	3342489
+				fill_color 	13434879
+				quidu      	"5AB2777101A1"
+				compartment 	(object Compartment
+				    Parent_View 	@136
+				    location   	(1455, 620)
+				    font       	(object Font
+					size       	10
+					face       	"Arial"
+					bold       	FALSE
+					italics    	FALSE
+					underline  	FALSE
+					strike     	FALSE
+					color      	0
+					default_color 	TRUE)
+				    icon_style 	"Icon"
+				    fill_color 	13434879
+				    anchor     	2
+				    nlines     	2
+				    max_width  	287
+				    justify    	1)
+				width      	308
+				height     	186
+				annotation 	8
+				autoResize 	TRUE)
+			    (object ClassView "Class" "Use Case View::类图::DAL" @137
+				ShowCompartmentStereotypes 	TRUE
+				IncludeAttribute 	TRUE
+				IncludeOperation 	TRUE
+				location   	(1056, 1008)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				label      	(object ItemLabel
+				    Parent_View 	@137
+				    location   	(975, 957)
+				    fill_color 	13434879
+				    nlines     	1
+				    max_width  	162
+				    justify    	0
+				    label      	"DAL")
+				icon_style 	"Icon"
+				line_color 	3342489
+				fill_color 	13434879
+				quidu      	"5AB27775012A"
+				height     	126
+				annotation 	8
+				autoResize 	TRUE)
+			    (object ClassView "Class" "Use Case View::类图::DAL接口" @138
+				ShowCompartmentStereotypes 	TRUE
+				IncludeAttribute 	TRUE
+				IncludeOperation 	TRUE
+				location   	(1520, 1016)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				label      	(object ItemLabel
+				    Parent_View 	@138
+				    location   	(1519, 1124)
+				    anchor_loc 	1
+				    nlines     	2
+				    max_width  	345
+				    justify    	0
+				    label      	"DAL接口")
+				icon       	"Interface"
+				icon_style 	"Icon"
+				line_color 	3342489
+				fill_color 	13434879
+				quidu      	"5AB2778E01ED"
+				compartment 	(object Compartment
+				    Parent_View 	@138
+				    location   	(1326, 1165)
+				    font       	(object Font
+					size       	10
+					face       	"Arial"
+					bold       	FALSE
+					italics    	FALSE
+					underline  	FALSE
+					strike     	FALSE
+					color      	0
+					default_color 	TRUE)
+				    icon_style 	"Icon"
+				    anchor     	2
+				    nlines     	3
+				    max_width  	337
+				    justify    	0)
+				width      	58
+				height     	58
+				annotation 	8
+				autoResize 	TRUE)
+			    (object RealizeView "" @139
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"5AB277C70354"
+				client     	@137
+				supplier   	@138
+				vertices   	(list Points
+				    (1146, 1009)
+				    (1490, 1011))
+				line_style 	0)
+			    (object UsesView "" @140
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"5AB279A90130"
+				client     	@130
+				supplier   	@136
+				vertices   	(list Points
+				    (1243, 451)
+				    (1445, 558))
+				line_style 	0)
+			    (object UsesView "" @141
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"5AB279DC0066"
+				client     	@130
+				supplier   	@137
+				vertices   	(list Points
+				    (1056, 461)
+				    (1056, 944))
+				line_style 	0)))
+		    (object ClassDiagram "迁移"
+			quid       	"5AB27C3C02CF"
+			title      	"迁移"
+			zoom       	100
+			max_height 	28350
+			max_width  	21600
+			origin_x   	344
+			origin_y   	0
+			items      	(list diagram_item_list
+			    (object ClassView "Class" "Use Case View::类图::DBConfig" @142
+				ShowCompartmentStereotypes 	TRUE
+				IncludeAttribute 	TRUE
+				IncludeOperation 	TRUE
+				location   	(832, 224)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				label      	(object ItemLabel
+				    Parent_View 	@142
+				    location   	(651, 93)
+				    fill_color 	13434879
+				    nlines     	1
+				    max_width  	362
+				    justify    	0
+				    label      	"DBConfig")
+				icon_style 	"Icon"
+				line_color 	3342489
+				fill_color 	13434879
+				quidu      	"5AB244A502FF"
+				compartment 	(object Compartment
+				    Parent_View 	@142
+				    location   	(651, 154)
+				    font       	(object Font
+					size       	10
+					face       	"Arial"
+					bold       	FALSE
+					italics    	FALSE
+					underline  	FALSE
+					strike     	FALSE
+					color      	0
+					default_color 	TRUE)
+				    icon_style 	"Icon"
+				    fill_color 	13434879
+				    anchor     	2
+				    nlines     	4
+				    max_width  	359
+				    justify    	1)
+				width      	380
+				height     	286
+				annotation 	8
+				autoResize 	TRUE)
+			    (object ClassView "Class" "Use Case View::类图::BLL" @143
+				ShowCompartmentStereotypes 	TRUE
+				IncludeAttribute 	TRUE
+				IncludeOperation 	TRUE
+				location   	(848, 560)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				label      	(object ItemLabel
+				    Parent_View 	@143
+				    location   	(678, 479)
+				    fill_color 	13434879
+				    nlines     	1
+				    max_width  	340
+				    justify    	0
+				    label      	"BLL")
+				icon_style 	"Icon"
+				line_color 	3342489
+				fill_color 	13434879
+				quidu      	"5AB26DFF020E"
+				compartment 	(object Compartment
+				    Parent_View 	@143
+				    location   	(678, 540)
+				    font       	(object Font
+					size       	10
+					face       	"Arial"
+					bold       	FALSE
+					italics    	FALSE
+					underline  	FALSE
+					strike     	FALSE
+					color      	0
+					default_color 	TRUE)
+				    icon_style 	"Icon"
+				    fill_color 	13434879
+				    anchor     	2
+				    nlines     	2
+				    max_width  	384
+				    justify    	1)
+				width      	358
+				height     	186
+				annotation 	8
+				autoResize 	TRUE)
+			    (object UsesView "" @144
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"5AB277540344"
+				client     	@143
+				supplier   	@142
+				vertices   	(list Points
+				    (843, 466)
+				    (838, 367))
+				line_style 	0)
+			    (object ClassView "Class" "Use Case View::类图::DAL" @145
+				ShowCompartmentStereotypes 	TRUE
+				IncludeAttribute 	TRUE
+				IncludeOperation 	TRUE
+				location   	(1472, 1088)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				label      	(object ItemLabel
+				    Parent_View 	@145
+				    location   	(1391, 1037)
+				    fill_color 	13434879
+				    nlines     	1
+				    max_width  	162
+				    justify    	0
+				    label      	"DAL")
+				icon_style 	"Icon"
+				line_color 	3342489
+				fill_color 	13434879
+				quidu      	"5AB27775012A"
+				height     	126
+				annotation 	8
+				autoResize 	TRUE)
+			    (object ClassView "Class" "Use Case View::类图::MQHelper" @146
+				ShowCompartmentStereotypes 	TRUE
+				IncludeAttribute 	TRUE
+				IncludeOperation 	TRUE
+				location   	(1520, 320)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				label      	(object ItemLabel
+				    Parent_View 	@146
+				    location   	(1411, 214)
+				    fill_color 	13434879
+				    nlines     	1
+				    max_width  	218
+				    justify    	0
+				    label      	"MQHelper")
+				icon_style 	"Icon"
+				line_color 	3342489
+				fill_color 	13434879
+				quidu      	"5AB270390181"
+				compartment 	(object Compartment
+				    Parent_View 	@146
+				    location   	(1411, 275)
+				    font       	(object Font
+					size       	10
+					face       	"Arial"
+					bold       	FALSE
+					italics    	FALSE
+					underline  	FALSE
+					strike     	FALSE
+					color      	0
+					default_color 	TRUE)
+				    icon_style 	"Icon"
+				    fill_color 	13434879
+				    anchor     	2
+				    nlines     	3
+				    max_width  	216
+				    justify    	1)
+				width      	236
+				height     	236
+				annotation 	8
+				autoResize 	TRUE)
+			    (object UsesView "" @147
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"5AB277530152"
+				client     	@143
+				supplier   	@146
+				vertices   	(list Points
+				    (1027, 495)
+				    (1401, 362))
+				line_style 	0)
+			    (object ClassView "Class" "Use Case View::类图::通用方法类" @148
+				ShowCompartmentStereotypes 	TRUE
+				IncludeAttribute 	TRUE
+				IncludeOperation 	TRUE
+				location   	(1472, 704)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				label      	(object ItemLabel
+				    Parent_View 	@148
+				    location   	(1331, 598)
+				    fill_color 	13434879
+				    nlines     	1
+				    max_width  	282
+				    justify    	0
+				    label      	"通用方法类")
+				icon_style 	"Icon"
+				line_color 	3342489
+				fill_color 	13434879
+				quidu      	"5AB2840A007B"
+				compartment 	(object Compartment
+				    Parent_View 	@148
+				    location   	(1331, 659)
+				    font       	(object Font
+					size       	10
+					face       	"Arial"
+					bold       	FALSE
+					italics    	FALSE
+					underline  	FALSE
+					strike     	FALSE
+					color      	0
+					default_color 	TRUE)
+				    icon_style 	"Icon"
+				    fill_color 	13434879
+				    anchor     	2
+				    nlines     	3
+				    max_width  	284
+				    justify    	1)
+				width      	300
+				height     	236
+				annotation 	8
+				autoResize 	TRUE)
+			    (object UsesView "" @149
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"5AB285AD0367"
+				client     	@143
+				supplier   	@148
+				vertices   	(list Points
+				    (1027, 600)
+				    (1321, 669))
+				line_style 	0)
+			    (object ClassView "Class" "Use Case View::类图:: BLL" @150
+				ShowCompartmentStereotypes 	TRUE
+				IncludeAttribute 	TRUE
+				IncludeOperation 	TRUE
+				location   	(400, 704)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				label      	(object ItemLabel
+				    Parent_View 	@150
+				    location   	(399, 812)
+				    anchor_loc 	1
+				    nlines     	2
+				    max_width  	257
+				    justify    	0
+				    label      	" BLL")
+				icon       	"Interface"
+				icon_style 	"Icon"
+				line_color 	3342489
+				fill_color 	13434879
+				quidu      	"5AB289B603BB"
+				compartment 	(object Compartment
+				    Parent_View 	@150
+				    location   	(256, 853)
+				    font       	(object Font
+					size       	10
+					face       	"Arial"
+					bold       	FALSE
+					italics    	FALSE
+					underline  	FALSE
+					strike     	FALSE
+					color      	0
+					default_color 	TRUE)
+				    icon_style 	"Icon"
+				    anchor     	2
+				    nlines     	2
+				    max_width  	250
+				    justify    	0)
+				width      	58
+				height     	58
+				annotation 	8
+				autoResize 	TRUE)
+			    (object ClassView "Class" "Use Case View::类图:: DAL" @151
+				ShowCompartmentStereotypes 	TRUE
+				IncludeAttribute 	TRUE
+				IncludeOperation 	TRUE
+				location   	(848, 1088)
+				font       	(object Font
+				    size       	10
+				    face       	"Arial"
+				    bold       	FALSE
+				    italics    	FALSE
+				    underline  	FALSE
+				    strike     	FALSE
+				    color      	0
+				    default_color 	TRUE)
+				label      	(object ItemLabel
+				    Parent_View 	@151
+				    location   	(847, 1196)
+				    anchor_loc 	1
+				    nlines     	1
+				    max_width  	228
+				    justify    	0
+				    label      	" DAL")
+				icon       	"Interface"
+				icon_style 	"Icon"
+				line_color 	3342489
+				fill_color 	13434879
+				quidu      	"5AB289BC0382"
+				compartment 	(object Compartment
+				    Parent_View 	@151
+				    location   	(654, 1237)
+				    font       	(object Font
+					size       	10
+					face       	"Arial"
+					bold       	FALSE
+					italics    	FALSE
+					underline  	FALSE
+					strike     	FALSE
+					color      	0
+					default_color 	TRUE)
+				    icon_style 	"Icon"
+				    anchor     	2
+				    nlines     	3
+				    max_width  	338
+				    justify    	0)
+				width      	58
+				height     	58
+				annotation 	8
+				autoResize 	TRUE)
+			    (object UsesView "" @152
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"5AB289FC01E6"
+				client     	@143
+				supplier   	@151
+				vertices   	(list Points
+				    (848, 653)
+				    (848, 1060))
+				line_style 	0)
+			    (object InheritView "" @153
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"5AB312A40327"
+				client     	@145
+				supplier   	@151
+				vertices   	(list Points
+				    (1381, 1088)
+				    (874, 1088))
+				line_style 	0)
+			    (object InheritView "" @154
+				stereotype 	TRUE
+				line_color 	3342489
+				quidu      	"5AB312BF012F"
+				client     	@143
+				supplier   	@150
+				vertices   	(list Points
+				    (668, 617)
+				    (426, 693))
+				line_style 	0))))))
 	logical_presentations 	(list unit_reference_list
 	    (object UseCaseDiagram "Main"
 		quid       	"5AB0D738020F"
@@ -3057,7 +4043,7 @@
 		origin_x   	0
 		origin_y   	0
 		items      	(list diagram_item_list
-		    (object CategoryView "Logical View::java" @129
+		    (object CategoryView "Logical View::java" @155
 			location   	(208, 272)
 			font       	(object Font
 			    size       	10
@@ -3069,7 +4055,7 @@
 			    color      	0
 			    default_color 	TRUE)
 			label      	(object ItemLabel
-			    Parent_View 	@129
+			    Parent_View 	@155
 			    location   	(64, 188)
 			    fill_color 	16777215
 			    nlines     	2
@@ -3082,7 +4068,7 @@
 			quidu      	"39C92661003B"
 			width      	300
 			height     	180)
-		    (object CategoryView "Logical View::javax" @130
+		    (object CategoryView "Logical View::javax" @156
 			location   	(656, 272)
 			font       	(object Font
 			    size       	10
@@ -3094,7 +4080,7 @@
 			    color      	0
 			    default_color 	TRUE)
 			label      	(object ItemLabel
-			    Parent_View 	@130
+			    Parent_View 	@156
 			    location   	(512, 188)
 			    fill_color 	16777215
 			    nlines     	2
@@ -3107,7 +4093,7 @@
 			quidu      	"39C926610018"
 			width      	300
 			height     	180)
-		    (object CategoryView "Logical View::org" @131
+		    (object CategoryView "Logical View::org" @157
 			location   	(1104, 272)
 			font       	(object Font
 			    size       	10
@@ -3119,7 +4105,7 @@
 			    color      	0
 			    default_color 	TRUE)
 			label      	(object ItemLabel
-			    Parent_View 	@131
+			    Parent_View 	@157
 			    location   	(960, 188)
 			    fill_color 	16777215
 			    nlines     	2
@@ -3141,7 +4127,7 @@
 		origin_x   	0
 		origin_y   	0
 		items      	(list diagram_item_list
-		    (object NoteView @132
+		    (object NoteView @158
 			location   	(224, 624)
 			font       	(object Font
 			    size       	10
@@ -3156,7 +4142,7 @@
 			fill_color 	12632256
 			width      	300
 			height     	132)
-		    (object NoteView @133
+		    (object NoteView @159
 			location   	(704, 624)
 			font       	(object Font
 			    size       	10
@@ -3171,7 +4157,7 @@
 			fill_color 	8421631
 			width      	300
 			height     	132)
-		    (object NoteView @134
+		    (object NoteView @160
 			location   	(1200, 624)
 			font       	(object Font
 			    size       	10
@@ -3186,7 +4172,7 @@
 			fill_color 	12615680
 			width      	300
 			height     	132)
-		    (object NoteView @135
+		    (object NoteView @161
 			location   	(1664, 624)
 			font       	(object Font
 			    size       	10
@@ -3201,7 +4187,7 @@
 			fill_color 	16777215
 			width      	300
 			height     	132)
-		    (object Label @136
+		    (object Label @162
 			location   	(81, 369)
 			font       	(object Font
 			    size       	12
@@ -3216,7 +4202,7 @@
 			max_width  	1163
 			justify    	1
 			label      	"J2EE: Java 2 Platform, Enterprise Edition - v 1.2.1")
-		    (object Label @137
+		    (object Label @163
 			location   	(96, 608)
 			font       	(object Font
 			    size       	10
@@ -3231,7 +4217,7 @@
 			max_width  	268
 			justify    	1
 			label      	"Abstract Class")
-		    (object Label @138
+		    (object Label @164
 			location   	(592, 608)
 			font       	(object Font
 			    size       	10
@@ -3246,7 +4232,7 @@
 			max_width  	225
 			justify    	1
 			label      	"Final Class")
-		    (object Label @139
+		    (object Label @165
 			location   	(1104, 608)
 			font       	(object Font
 			    size       	10
@@ -3261,7 +4247,7 @@
 			max_width  	206
 			justify    	1
 			label      	"Interface")
-		    (object Label @140
+		    (object Label @166
 			location   	(1552, 608)
 			font       	(object Font
 			    size       	10
