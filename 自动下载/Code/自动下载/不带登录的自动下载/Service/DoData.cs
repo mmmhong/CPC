@@ -21,7 +21,7 @@ namespace 不带登录的自动下载
             urlString.Add("http://data.chinacpc.org/EVENT/Emergency?Id=" + id + "&_=1521112559000");
             urlString.Add("http://data.chinacpc.org/EVENT/Outcome?Id=" + id + "&_=1521112559000");
             urlString.Add("http://data.chinacpc.org/EVENT/GetDiagnosisTreatment?_=1521112559000&registerId=" + id);
-
+             
             foreach (var str in urlString)
             {
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(str);

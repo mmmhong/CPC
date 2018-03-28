@@ -18,7 +18,7 @@ namespace 不带登录的自动下载
             //Request配置
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create("http://data.chinacpc.org/patient/getPatientList");
             request.Accept = "application/json,text/plain,*/*";
-            request.Headers.Add("Cookie", "");//填写Cookie
+            request.Headers.Add("Cookie", "UM_distinctid=161ffe358475a8-0887a8ee52bf5f-722c6137-7d400-161ffe35849272; acw_tc=AQAAAHJNkx8Z1QsA+OlNMRfetHv2yyhu; __RequestVerificationToken=SQre0f65JAoa-eH17I-ong5zfz9SICVdslfHFf56KgBfnsaW6oQHltvXN7wediSYmmuHyx8gnt-RrkQf7f-O3ys44g825WtJ9oR-69sq-dA1; CNZZDATA1261146931=643416402-1520413279-%7C1522216960; ASP.NET_SessionId=te0xjfb4z1hronza3phtbion; .ASPXAUTH=B7EB6BB0917E97F1D90F9CF2BB65CBD6FFD49F6F6AA8E1D76D606A5F8882E4DE6AFAF122B859DE756794C6B384517D5F2415E4F630E8679FCBAC6CE7EDC9D2214C2E0ADCB4CBDB321B36E383DA1C99D0312AD8404314256BC43E07F173C52323");//填写Cookie
             request.ContentType = "application/json;charset=UTF-8";
             request.Method = "POST";
             request.Host = "data.chinacpc.org";

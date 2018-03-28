@@ -25,8 +25,8 @@ namespace 不带登录的自动下载
             GetAllPatient getPatient = new GetAllPatient();
             string responseString = getPatient.Do();
 
-          //  WriteIdToTXT write = new WriteIdToTXT();
-           // PatientList = write.Do(responseString);
+            WriteIdToTXT write = new WriteIdToTXT();
+            PatientList = write.Do(responseString);
             Print();
 
         }
@@ -38,7 +38,7 @@ namespace 不带登录的自动下载
         /// <param name="e"></param>
         private void Btn_Save_Click(object sender, EventArgs e)
         {
-            if(PatientList.Count<=0)
+            if (PatientList.Count <= 0)
             {
                 MessageBox.Show("请先获取所有用户");
             }
@@ -54,7 +54,7 @@ namespace 不带登录的自动下载
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
-            if(PatientList == null)
+            if (PatientList == null)
             {
                 MessageBox.Show("请先获取所有用户");
                 return;
@@ -88,7 +88,7 @@ namespace 不带登录的自动下载
         /// </summary>
         public void Print()
         {
-            if(PatientList==null)
+            if (PatientList == null)
             {
                 MessageBox.Show("患者列表为空!!");
                 return;
