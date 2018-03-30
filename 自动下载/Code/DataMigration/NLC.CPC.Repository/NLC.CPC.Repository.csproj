@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{90A21A20-41C4-4E30-B88A-210500447088}</ProjectGuid>
+    <ProjectGuid>{739C1297-3066-406C-80E3-F8DD24B9AFA8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NLC.CPC.Repository</RootNamespace>
@@ -47,17 +47,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DAL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\NLC.CPC.Infrastructure.csproj">
-      <Project>{D4C7B5E8-921F-4B01-AC9D-4B5B8836A12D}</Project>
+    <ProjectReference Include="..\NLC.CPC.Infrastructure\NLC.CPC.Infrastructure.csproj">
+      <Project>{F4B0B050-108C-4CB3-9855-2524CAE68706}</Project>
       <Name>NLC.CPC.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IDAL\NLC.CPC.IRepository.csproj">
-      <Project>{DE6457DE-6FCC-412E-BE8C-7C409CBEBD58}</Project>
+    <ProjectReference Include="..\NLC.CPC.IRepository\NLC.CPC.IRepository.csproj">
+      <Project>{77D4FAEC-3168-46EE-A9AF-6AD33F678C22}</Project>
       <Name>NLC.CPC.IRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NLC.CPC.IService\NLC.CPC.IService.csproj">
+      <Project>{189F1E0D-0B42-48E9-B60B-0CFCF16A99B6}</Project>
+      <Name>NLC.CPC.IService</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

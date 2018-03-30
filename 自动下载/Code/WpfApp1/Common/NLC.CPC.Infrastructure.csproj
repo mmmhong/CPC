@@ -44,6 +44,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -53,10 +54,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\SimulationRequest.cs" />
     <Compile Include="Context\MyContext.cs" />
-    <Compile Include="GetRequest.cs" />
-    <Compile Include="JsonParse.cs" />
+    <Compile Include="Common\GetRequest.cs" />
+    <Compile Include="Common\JsonParse.cs" />
+    <Compile Include="Model\Data.cs" />
+    <Compile Include="Model\FieldTable.cs" />
     <Compile Include="Model\Patient.cs" />
+    <Compile Include="Model\RecordType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

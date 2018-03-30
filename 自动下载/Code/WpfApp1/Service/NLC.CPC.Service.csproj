@@ -33,6 +33,9 @@
     <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.6.2\lib\net45\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="BSF.Full">
+      <HintPath>.\BSF.Full.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -63,6 +66,10 @@
     <ProjectReference Include="..\IService\NLC.CPC.IService.csproj">
       <Project>{19a177a5-851d-430a-913e-dd69eadb75c8}</Project>
       <Name>NLC.CPC.IService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MQHelper\NLC.CPC.MQ.csproj">
+      <Project>{071410DD-E370-4195-A68F-BBF333390D9D}</Project>
+      <Name>NLC.CPC.MQ</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

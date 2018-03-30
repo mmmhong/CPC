@@ -34,8 +34,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.6.2\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="BSF.Full, Version=2.2.2.3, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\BSF.Full.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -85,6 +103,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -92,6 +111,28 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MQHelper\NLC.CPC.MQ.csproj">
+      <Project>{45A46DEA-A20A-44DF-A507-4356E22ED26A}</Project>
+      <Name>NLC.CPC.MQ</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NLC.CPC.IRepository\NLC.CPC.IRepository.csproj">
+      <Project>{77D4FAEC-3168-46EE-A9AF-6AD33F678C22}</Project>
+      <Name>NLC.CPC.IRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NLC.CPC.IService\NLC.CPC.IService.csproj">
+      <Project>{189F1E0D-0B42-48E9-B60B-0CFCF16A99B6}</Project>
+      <Name>NLC.CPC.IService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NLC.CPC.Repository\NLC.CPC.Repository.csproj">
+      <Project>{739C1297-3066-406C-80E3-F8DD24B9AFA8}</Project>
+      <Name>NLC.CPC.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service\NLC.CPC.Service.csproj">
+      <Project>{917A2DDA-0937-40F4-8593-328228A151BC}</Project>
+      <Name>NLC.CPC.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

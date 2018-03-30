@@ -1,4 +1,4 @@
-﻿using Common.Model;
+﻿using NLC.CPC.Infrastructure.TargetModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,25 +8,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Context
+namespace NLC.CPC.Infrastructure.Context
 {
-    public class MyContext : DbContext
+    public class TargetDBContext:DbContext
     {
-        public MyContext() : base("PatientContext")
+        public TargetDBContext() :base("TargetContext")
         {
-            var d = Database;
         }
-        static MyContext()
+        static TargetDBContext()
         {
-            Database.SetInitializer<MyContext>(null);//EF不修改数据库
+            Database.SetInitializer<TargetDBContext>(null);//EF不修改数据库
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            //移除复数表名的契约
+            //移除负数表名的契约
         }
 
-        internal sealed class ReportingDbMigrationsConfiguration : DbMigrationsConfiguration<MyContext>
+        internal sealed class ReportingDbMigrationsConfiguration : DbMigrationsConfiguration<TargetDBContext>
         {
             public ReportingDbMigrationsConfiguration()
             {
@@ -34,10 +33,7 @@ namespace Common.Context
                 AutomaticMigrationDataLossAllowed = true;
             }
         }
-
-        public DbSet<Patient> Patient { get; set; }
-        public DbSet<Data> Data { get; set; }
-        public DbSet<FieldTable> FieldTable { get; set; }
-        public DbSet<RecordType> RecordType { get; set; }
+        public DbSet<TbCaseReportFormData> TbCaseReportFormData { get; set; }
+        public DbSet<TbFormField> TbFormField { get; set; }
     }
 }

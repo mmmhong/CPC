@@ -1,4 +1,4 @@
-﻿using Common.Model;
+﻿using NLC.CPC.Infrastructure.SourceModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,25 +8,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Context
+namespace NLC.CPC.Infrastructure.Context
 {
-    public class MyContext : DbContext
+    public class SourceDBContext : DbContext
     {
-        public MyContext() : base("PatientContext")
+        public SourceDBContext() : base("SourceContext")
         {
-            var d = Database;
+
         }
-        static MyContext()
+        static SourceDBContext()
         {
-            Database.SetInitializer<MyContext>(null);//EF不修改数据库
+            Database.SetInitializer<SourceDBContext>(null);//EF不修改数据库
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            //移除复数表名的契约
+            //移除负数表名的契约
         }
 
-        internal sealed class ReportingDbMigrationsConfiguration : DbMigrationsConfiguration<MyContext>
+        internal sealed class ReportingDbMigrationsConfiguration : DbMigrationsConfiguration<SourceDBContext>
         {
             public ReportingDbMigrationsConfiguration()
             {
@@ -34,10 +34,10 @@ namespace Common.Context
                 AutomaticMigrationDataLossAllowed = true;
             }
         }
-
-        public DbSet<Patient> Patient { get; set; }
         public DbSet<Data> Data { get; set; }
+        public DbSet<FieldRelationship> FieldRelationship { get; set; }
         public DbSet<FieldTable> FieldTable { get; set; }
+        public DbSet<Patient> Patient { get; set; }
         public DbSet<RecordType> RecordType { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace NLC.CPC.IService
         /// <param name="cookie"></param>
         /// <param name="connStr"></param>
         /// <returns></returns>
-        bool downloadPatient(string cookie,string connStr);
+        bool downloadPatient();
 
         /// <summary>
         /// 下载患者病历

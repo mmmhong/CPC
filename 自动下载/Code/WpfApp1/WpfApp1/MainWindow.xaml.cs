@@ -35,26 +35,6 @@ namespace WpfApp1
         }
 
         /// <summary>
-        /// 测试连接
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Btn_Test_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        /// <summary>
-        /// 退出
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Btn_Exit_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        /// <summary>
         /// 下载患者列表
         /// </summary>
         /// <param name="sender"></param>
@@ -72,9 +52,12 @@ namespace WpfApp1
             //创建一个新的生命周期范围
             using (var scope = Container.BeginLifetimeScope())
             {
-                var a = scope.Resolve<IDownload>();//解析接口的实例
-                MessageBox.Show($"{a.test()}");
-               // a.downloadPatient(Cookie.Text,DBConnStr);
+                var d = scope.Resolve<IDownload>();//解析接口的实例
+                //MessageBox.Show($"{a.test()}");
+                if(d.downloadPatient())//调用下载Service层下载患者列表方法
+                {
+                    MessageBox.Show("患者列表下载完成！");
+                }
             }
         }
 
@@ -92,11 +75,32 @@ namespace WpfApp1
             }
             //存储配置
             SaveAppSettings();
-            //if(download.downloadRecord())
-            //{
-            //    MessageBox.Show("病历下载完成");
-            //}
+            var d = Container.Resolve<IDownload>();
+            if (d.downloadRecord())
+            {
+                MessageBox.Show("病历下载完成");
+            }
 
+        }
+
+        /// <summary>
+        /// 测试连接
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Btn_Test_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 退出
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Btn_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
 
         #region 自定义方法

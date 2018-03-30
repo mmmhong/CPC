@@ -5,8 +5,70 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DataMigration"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="508.4" Width="741.8">
+
+
+    <!--#region 按钮样式-->
+    <Window.Resources>
+        <ControlTemplate x:Key="mh" TargetType="{x:Type Button}">
+            <Border x:Name="bd2" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="10,10,10,10">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="White" Offset="0.0" />
+                        <GradientStop Color="LightBlue" Offset="0.5" />
+                        <GradientStop Color="White" Offset="0.0" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" ></ContentPresenter>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="bd2" Property="Height" Value="39"/>
+                    <Setter TargetName="bd2" Property="Width" Value="66"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="bd2" Property="Background" Value="#A6D8FF"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+    <!--#endregion-->
+
+
+
+
     <Grid>
-        
+        <Viewbox Stretch="Fill">
+            <Canvas Width="755" Height="446" Background="AliceBlue" RenderTransformOrigin="1.005,1.008">
+
+                <!--#region 按钮-->
+                <Button x:Name="Btn_DownloadPatient" Content="开始移动该数据" Width="96" Height="48" Canvas.Left="172" Canvas.Top="280" Click="Btn_DownloadPatient_Click" Template="{DynamicResource mh}"/>
+                <Button x:Name="Btn_Exit" Content="退出" Width="65" Height="37" Canvas.Left="333" Canvas.Top="280" Click="Btn_Exit_Click" Template="{DynamicResource mh}"/>
+                <!--#endregion-->
+
+                <!--#region Lable-->
+                <Label Content="数据库用户名：" Canvas.Left="34" Canvas.Top="142"/>
+                <Label Content="数据库密码：" Canvas.Left="41" Canvas.Top="181"/>
+                <Label Content="数据库名称：" Canvas.Left="41" Canvas.Top="223"/>
+                <Label Content="服务器名：" Canvas.Left="52" Canvas.Top="100"/>
+                <!--#endregion-->
+
+                <!--#region Lable-->
+                <Label Content="数据库用户名：" Canvas.Left="418" Canvas.Top="151"/>
+                <Label Content="数据库密码：" Canvas.Left="425" Canvas.Top="189"/>
+                <Label Content="数据库名称：" Canvas.Left="425" Canvas.Top="232"/>
+                <Label Content="服务器名：" Canvas.Left="437" Canvas.Top="109"/>
+                <!--#endregion-->
+
+
+                <!--#region TextBox-->
+                <TextBox Name="DBUserName" Height="25" Canvas.Left="128" TextWrapping="Wrap" Canvas.Top="142" Width="140" Background="White" FontSize="13"/>
+                <PasswordBox Name="DBPwd" Height="26" Canvas.Left="128" Canvas.Top="181" Width="140" Background="White" FontSize="13"/>
+                <TextBox Name="DBName" Height="26" Canvas.Left="128" TextWrapping="Wrap" Canvas.Top="223" Width="140" Background="White" FontSize="13" RenderTransformOrigin="0.462,0.606"/>
+                <TextBox x:Name="DBSource" Height="25" Canvas.Left="128" TextWrapping="Wrap" Canvas.Top="100" Width="140" Background="White" FontSize="13"/>
+                <Button Content="Button" Canvas.Left="53" Canvas.Top="280" Width="75" Click="Button_Click"/>
+                <!--#endregion-->
+            </Canvas>
+        </Viewbox>
     </Grid>
 </Window>
