@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DownloadUI"
         mc:Ignorable="d"
-        Title="SpiderMan" Height="508.4" Width="746.8">
+        Title="SpiderMan" Height="506.8" Width="478">
 
     <!--#region 按钮样式-->
     <Window.Resources>
@@ -36,19 +36,17 @@
 
     <Viewbox Stretch="Fill">
 
-        <Canvas Width="786" Height="462" Background="BurlyWood"  RenderTransformOrigin="1.005,1.008">
+        <Canvas Width="439" Height="461" Background="BurlyWood"  RenderTransformOrigin="1.005,1.008">
 
             <Border BorderBrush="Black" BorderThickness="1" Height="401" Canvas.Left="23" Canvas.Top="32" Width="384" Background="Snow">
                 <Label Content=""/>
             </Border>
-            <Border BorderBrush="Black" Background="Snow" BorderThickness="1" Height="277" Canvas.Left="455" Canvas.Top="124" Width="311"/>
 
             <!--#region 按钮-->
             <Button x:Name="Btn_Test" Content="测试连接" Width="65" Height="37" Canvas.Left="323" Canvas.Top="314" Click="Btn_Test_Click" Template="{DynamicResource mh}"/>
             <Button x:Name="Btn_DownloadPatient" Content="下载患者" Width="65" Height="37" Canvas.Left="82" Canvas.Top="382" Click="Btn_DownloadPatient_Click" Template="{DynamicResource mh}"/>
             <Button x:Name="Btn_DownloadRecord" Content="下载病历" Width="65" Height="37" Canvas.Left="187" Canvas.Top="382" Click="Btn_DownloadRecord_Click" Template="{DynamicResource mh}"/>
             <Button x:Name="Btn_Exit" Content="退出" Width="65" Height="37" Canvas.Left="291" Canvas.Top="382" Click="Btn_Exit_Click" Template="{DynamicResource mh}"/>
-            <Button x:Name="DoMigration" Content="启动消息队列" Height="41" Canvas.Left="455" Canvas.Top="53" Width="94" Template="{DynamicResource mh}" Click="DoMigration_Click"/>
 
             <!--#region Lable-->
             <Label Content="请输入Cookie值：" Canvas.Left="41" Canvas.Top="62" Width="105" Height="25"/>
@@ -56,14 +54,7 @@
             <Label Content="数据库密码：" Canvas.Left="41" Canvas.Top="283"/>
             <Label Content="数据库名称：" Canvas.Left="41" Canvas.Top="325"/>
             <Label Content="服务器名：" Canvas.Left="52" Canvas.Top="202"/>
-            
-            <Label Content="迁移" Canvas.Left="678" Height="32" Width="62" FontSize="18" Canvas.Top="106" Background="AntiqueWhite" RenderTransformOrigin="4.084,2.099"/>
             <Label Content=" 下载" Canvas.Left="41" Height="32" Width="62" FontSize="18" Canvas.Top="16" Background="AntiqueWhite"/>
-
-            <Label Content="服务器名：" Canvas.Left="491" Canvas.Top="170"/>
-            <Label Content="数据库用户名：" Canvas.Left="473" Canvas.Top="212"/>
-            <Label Content="数据库密码：" Canvas.Left="480" Canvas.Top="251"/>
-            <Label Content="数据库名称：" Canvas.Left="480" Canvas.Top="293"/>
 
 
             <!--#region TextBox-->
@@ -72,12 +63,6 @@
             <PasswordBox x:Name="sDBPwd" Height="26" Canvas.Left="128" Canvas.Top="283" Width="140" Background="White" FontSize="13"/>
             <TextBox x:Name="sDBName" Height="26" Canvas.Left="128" TextWrapping="Wrap" Canvas.Top="325" Width="140" Background="White" FontSize="13"/>
             <TextBox x:Name="sDBSource" Height="25" Canvas.Left="128" TextWrapping="Wrap" Canvas.Top="202" Width="140" Background="White" FontSize="13"/>
-            
-            
-            <TextBox x:Name="tDBUserName" Height="25" Canvas.Left="567" TextWrapping="Wrap" Canvas.Top="212" Width="140" Background="White" FontSize="13"/>
-            <PasswordBox x:Name="tDBPwd" Height="26" Canvas.Left="567" Canvas.Top="251" Width="140" Background="White" FontSize="13"/>
-            <TextBox x:Name="tDBName" Height="26" Canvas.Left="567" TextWrapping="Wrap" Canvas.Top="293" Width="140" Background="White" FontSize="13"/>
-            <TextBox x:Name="tDBSource" Height="25" Canvas.Left="567" TextWrapping="Wrap" Canvas.Top="170" Width="140" Background="White" FontSize="13"/>
             <!--#endregion-->
         </Canvas>
     </Viewbox>

@@ -1,10 +1,12 @@
 ﻿using Autofac;
 using IService;
+using Newtonsoft.Json.Linq;
 using NLC.CPC.IRepository;
 using NLC.CPC.Repository;
 using Service;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,15 +28,17 @@ namespace MQUI
     public partial class MainWindow : Window
     {
         private static IContainer Container { get; set; }
-         
+
         public MainWindow()
         {
             InitializeComponent();
+            ShowConfig();
             Register();
         }
 
         private void DoMigration_Click(object sender, RoutedEventArgs e)
         {
+            SaveAppSettings();
             string str = DoMigration.Content.ToString();
             if (str.Equals("启动消息队列"))
             {
@@ -45,10 +49,32 @@ namespace MQUI
             }
             else
             {
-                DoMigration.Content = "启动消息队列";
+                return;
             }
         }
 
+        /// <summary>
+        /// 清空消息队列
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClearMQ_Click(object sender, RoutedEventArgs e)
+        {
+            var d = Container.Resolve<IMigration>();
+            if (d.ClearMQ())
+            {
+                MessageBox.Show("消息队列已清空");
+            }else
+            {
+                MessageBox.Show("消息队列错误");
+            }
+        }
+
+        /// <summary>
+        /// 退出
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_Exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -73,6 +99,71 @@ namespace MQUI
                 return;
             }
         }
+
+        /// <summary>
+        /// 从Config文件中读取配置信息显示在屏幕上
+        /// </summary>
+        public void ShowConfig()
+        {
+            try
+            {
+                string json = File.ReadAllText("..\\..\\Config\\DownloadConfig.json", Encoding.Default);
+                JObject jo = JObject.Parse(json);
+
+                JObject tempJo = JObject.Parse(jo["SourceDB"].ToString());
+                sDBName.Text = tempJo["DBName"].ToString();
+                sDBPwd.Password = tempJo["DBPwd"].ToString();
+                sDBUserName.Text = tempJo["DBUserName"].ToString();
+                sDBSource.Text = tempJo["DBSource"].ToString();
+
+                tempJo = JObject.Parse(jo["TargetDB"].ToString());
+                tDBName.Text = tempJo["DBName"].ToString();
+                tDBPwd.Password = tempJo["DBPwd"].ToString();
+                tDBUserName.Text = tempJo["DBUserName"].ToString();
+                tDBSource.Text = tempJo["DBSource"].ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// 存储配置信息
+        /// </summary>
+        public void SaveAppSettings()
+        {
+            try
+            {
+                string json = File.ReadAllText("..\\..\\Config\\DownloadConfig.json", Encoding.Default);
+                JObject jo = JObject.Parse(json);
+                JObject temp = JObject.Parse(jo["SourceDB"].ToString());
+                temp["DBName"] = sDBName.Text;
+                temp["DBPwd"] = sDBPwd.Password;
+                temp["DBUserName"] = sDBUserName.Text;
+                temp["DBSource"] = sDBSource.Text;
+                jo["SourceDB"] = temp;
+
+                temp = JObject.Parse(jo["TargetDB"].ToString());
+                temp["DBName"] = tDBName.Text;
+                temp["DBPwd"] = tDBPwd.Password;
+                temp["DBUserName"] = tDBUserName.Text;
+                temp["DBSource"] = tDBSource.Text;
+                jo["TargetDB"] = temp;
+                File.WriteAllText("..\\..\\Config\\DownloadConfig.json", jo.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public bool JudgeInputNull()
+        {
+
+            return true;
+        }
+
 
     }
 }

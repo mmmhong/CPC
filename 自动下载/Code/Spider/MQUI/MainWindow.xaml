@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MQUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="453.467" Width="602.867">
+        Title="MainWindow" Height="456.667" Width="653.267">
     <!--#region 按钮样式-->
     <Window.Resources>
         <ControlTemplate x:Key="mh" TargetType="{x:Type Button}">
@@ -35,13 +35,15 @@
 
     <Viewbox Stretch="Fill">
 
-        <Canvas Width="656" Height="387" Background="BurlyWood"  RenderTransformOrigin="1.005,1.008">
+        <Canvas Width="652" Height="376" Background="BurlyWood"  RenderTransformOrigin="1.005,1.008">
 
-            <Border BorderBrush="Black" BorderThickness="1" Height="325" Canvas.Left="16" Canvas.Top="41" Width="618" Background="Snow"/>
+            <Border BorderBrush="Black" BorderThickness="1" Height="325" Canvas.Left="16" Canvas.Top="41" Width="618" Background="Snow">
+                <TextBlock TextWrapping="Wrap"/>
+            </Border>
 
             <!--#region 按钮-->
             <Button x:Name="Btn_Exit" Content="退出" Width="78" Height="41" Canvas.Left="530" Canvas.Top="302" Click="Btn_Exit_Click" Template="{DynamicResource mh}" RenderTransformOrigin="0.493,0.572"/>
-            <Button x:Name="DoMigration" Content="启动消息队列" Height="41" Canvas.Left="142" Canvas.Top="302" Width="94" Template="{DynamicResource mh}" Click="DoMigration_Click"/>
+            <Button x:Name="DoMigration" Content="启动消息队列" Height="41" Canvas.Left="272" Canvas.Top="302" Width="94" Template="{DynamicResource mh}" Click="DoMigration_Click"/>
 
             <!--#region Lable-->
             <Label Content="数据库用户名：" Canvas.Left="49" Canvas.Top="174"/>
@@ -68,6 +70,9 @@
             <PasswordBox x:Name="tDBPwd" Height="26" Canvas.Left="443" Canvas.Top="214" Width="140" Background="White" FontSize="13"/>
             <TextBox x:Name="tDBName" Height="26" Canvas.Left="443" TextWrapping="Wrap" Canvas.Top="255" Width="140" Background="White" FontSize="13"/>
             <TextBox x:Name="tDBSource" Height="25" Canvas.Left="443" TextWrapping="Wrap" Canvas.Top="132" Width="140" Background="White" FontSize="13"/>
+            <TextBlock Canvas.Left="142" TextWrapping="Wrap" Text="源" Canvas.Top="86" Height="23" Width="28" FontSize="20"/>
+            <TextBlock Canvas.Left="458" TextWrapping="Wrap" Text="目标" Canvas.Top="86" FontSize="20" Height="27" Width="51"/>
+            <Button x:Name="ClearMQ" Content="清空消息队列" Height="41" Canvas.Left="93" Canvas.Top="302" Width="94" Template="{DynamicResource mh}" Click="ClearMQ_Click"/>
             <!--#endregion-->
         </Canvas>
     </Viewbox>

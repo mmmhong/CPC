@@ -8,10 +8,13 @@ using NLC.CPC.Service;
 using Service;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Windows;
+using System.Windows.Threading;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -22,7 +25,7 @@ namespace DownloadUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static IContainer Container { get; set; }
+        private static Autofac.IContainer Container { get; set; }
 
         /// <summary>
         /// 数据库连接字符串
@@ -34,8 +37,37 @@ namespace DownloadUI
             InitializeComponent();
             ShowConfig();
             Register();//调用注册方法
+            ThreadPool.SetMaxThreads(100, 10);
         }
 
+        private void test(object state)
+        {
+            this.Dispatcher.Invoke(new Action(() =>
+            {
+                if (Cookie.Text.Trim() == "" || sDBUserName.Text.Trim() == "" || sDBPwd.Password.Trim() == "" || sDBName.Text.Trim() == "" || sDBSource.Text.Trim() == "")
+                {
+                    MessageBox.Show("都填全了吗！！");
+                    return;
+                }
+                //存储配置
+                SaveAppSettings();
+
+                //创建一个新的生命周期范围
+                using (var scope = Container.BeginLifetimeScope())
+                {
+                    Thread.Sleep(100);
+                    var d = scope.Resolve<IDownload>();//解析接口的实例
+                    if (d.downloadPatient())//调用下载Service层下载患者列表方法
+                    {
+                        MessageBox.Show("患者列表下载完成！");
+                    }
+                    else
+                    {
+                        MessageBox.Show("失败");
+                    }
+                }
+            }));
+        }
         /// <summary>
         /// 下载患者列表
         /// </summary>
@@ -43,27 +75,8 @@ namespace DownloadUI
         /// <param name="e"></param>
         private void Btn_DownloadPatient_Click(object sender, RoutedEventArgs e)
         {
-            if (Cookie.Text.Trim() == "" || sDBUserName.Text.Trim() == "" || sDBPwd.Password.Trim() == "" || sDBName.Text.Trim() == "" || sDBSource.Text.Trim() == "")
-            {
-                MessageBox.Show("都填全了吗！！");
-                return;
-            }
-            //存储配置
-            SaveAppSettings();
+            ThreadPool.QueueUserWorkItem(new WaitCallback(test));
 
-            //创建一个新的生命周期范围
-            using (var scope = Container.BeginLifetimeScope())
-            {
-                var d = scope.Resolve<IDownload>();//解析接口的实例
-                if (d.downloadPatient())//调用下载Service层下载患者列表方法
-                {
-                    MessageBox.Show("患者列表下载完成！");
-                }
-                else
-                {
-                    MessageBox.Show("失败");
-                }
-            }
         }
 
         /// <summary>
@@ -90,34 +103,13 @@ namespace DownloadUI
 
 
         /// <summary>
-        /// 启动消息队列按钮，启动后即开始迁移
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void DoMigration_Click(object sender, RoutedEventArgs e)
-        {
-            string str = DoMigration.Content.ToString();
-            if (str.Equals("启动消息队列"))
-            {
-                var d = Container.Resolve<IMigration>();
-                d.DoMigration();
-                //启动消息队列
-                DoMigration.Content = "已启动";
-            }
-            else
-            {
-                DoMigration.Content = "启动消息队列";
-            }
-        }
-
-        /// <summary>
         /// 测试连接
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Btn_Test_Click(object sender, RoutedEventArgs e)
         {
-
+            SaveAppSettings();
         }
 
         /// <summary>
@@ -147,12 +139,6 @@ namespace DownloadUI
             sDBPwd.Password = tempJo["DBPwd"].ToString();
             sDBUserName.Text = tempJo["DBUserName"].ToString();
             sDBSource.Text = tempJo["DBSource"].ToString();
-
-            tempJo = JObject.Parse(jo["TargetDB"].ToString());
-            tDBName.Text = tempJo["DBName"].ToString();
-            tDBPwd.Password = tempJo["DBPwd"].ToString();
-            tDBUserName.Text = tempJo["DBUserName"].ToString();
-            tDBSource.Text = tempJo["DBSource"].ToString();
         }
 
         /// <summary>
@@ -192,15 +178,10 @@ namespace DownloadUI
                 temp["DBSource"] = sDBSource.Text;
                 jo["SourceDB"] = temp;
 
-                temp = JObject.Parse(jo["TargetDB"].ToString());
-                temp["DBName"] = tDBName.Text;
-                temp["DBPwd"] = tDBPwd.Password;
-                temp["DBUserName"] = tDBUserName.Text;
-                temp["DBSource"] = tDBSource.Text;
-                jo["TargetDB"] = temp;
+
                 File.WriteAllText("..\\..\\Config\\DownloadConfig.json", jo.ToString());
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

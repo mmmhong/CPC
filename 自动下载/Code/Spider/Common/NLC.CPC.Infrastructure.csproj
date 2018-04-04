@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ConfigString.cs" />
     <Compile Include="Common\GetCookieConfig.cs" />
     <Compile Include="Common\SimulationRequest.cs" />
     <Compile Include="Context\SourceDBContext.cs" />

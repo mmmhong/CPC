@@ -53,5 +53,24 @@ namespace Service
             _idal.SaveData(recoid, id);
             _idal.ChangeState(id);
         }
+
+        public bool ClearMQ()
+        {
+            try
+            {
+                MQ.Run();
+                MQ.Consumer.RegisterReceiveMQListener<string>((r) =>
+                {
+                    string str = r.ObjMsg;
+                    r.MarkFinished();
+                });
+                MQ.Dispose();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

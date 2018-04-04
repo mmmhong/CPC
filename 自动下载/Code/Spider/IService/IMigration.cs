@@ -19,5 +19,11 @@ namespace IService
         /// </summary>
         /// <param name="id"></param>
         void MirgrationById(string id);
+
+        /// <summary>
+        /// 清空消息队列
+        /// </summary>
+        /// <returns></returns>
+        bool ClearMQ();
     }
 }
