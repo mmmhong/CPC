@@ -12,7 +12,7 @@ namespace Common.Common
     {
         public string GetCookie()
         {
-            string json = File.ReadAllText("..\\..\\Config\\Config.json", Encoding.Default);
+            string json = File.ReadAllText("..\\..\\Config\\DownloadConfig.json", Encoding.Default);
             JObject jo = JObject.Parse(json);
             string cookie = jo["Cookie"].ToString();
             return cookie;

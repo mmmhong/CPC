@@ -15,7 +15,7 @@ using System.Windows;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace WpfApp1
+namespace DownloadUI
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
@@ -33,8 +33,6 @@ namespace WpfApp1
         {
             InitializeComponent();
             ShowConfig();
-          
-
             Register();//调用注册方法
         }
 
@@ -140,7 +138,7 @@ namespace WpfApp1
         /// </summary>
         public void ShowConfig()
         {
-            string json = File.ReadAllText("..\\..\\Config\\Config.json", Encoding.Default);
+            string json = File.ReadAllText("..\\..\\Config\\DownloadConfig.json", Encoding.Default);
             JObject jo = JObject.Parse(json);
 
             JObject tempJo = JObject.Parse(jo["SourceDB"].ToString());
@@ -167,7 +165,6 @@ namespace WpfApp1
                 var builder = new ContainerBuilder();
                 builder.RegisterType<Download>().As<IDownload>();//注册接口IDowmload的实例Download
                 builder.RegisterType<DAL>().As<IDAL>();//注册接口IDAL的实例DAL
-                builder.RegisterType<DAL>().As<IDAL>();
                 builder.RegisterType<Migration>().As<IMigration>();
                 Container = builder.Build();
 
@@ -186,7 +183,7 @@ namespace WpfApp1
         {
             try
             {
-                string json = File.ReadAllText("..\\..\\Config\\Config.json", Encoding.Default);
+                string json = File.ReadAllText("..\\..\\Config\\DownloadConfig.json", Encoding.Default);
                 JObject jo = JObject.Parse(json);
                 JObject temp = JObject.Parse(jo["SourceDB"].ToString());
                 temp["DBName"] = sDBName.Text;
@@ -201,7 +198,7 @@ namespace WpfApp1
                 temp["DBUserName"] = tDBUserName.Text;
                 temp["DBSource"] = tDBSource.Text;
                 jo["TargetDB"] = temp;
-                File.WriteAllText("..\\..\\Config\\Config.json", jo.ToString());
+                File.WriteAllText("..\\..\\Config\\DownloadConfig.json", jo.ToString());
             }
             catch(Exception ex)
             {
