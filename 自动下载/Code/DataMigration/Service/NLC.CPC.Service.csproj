@@ -51,6 +51,10 @@
       <Project>{45A46DEA-A20A-44DF-A507-4356E22ED26A}</Project>
       <Name>NLC.CPC.MQ</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NLC.CPC.Infrastructure\NLC.CPC.Infrastructure.csproj">
+      <Project>{F4B0B050-108C-4CB3-9855-2524CAE68706}</Project>
+      <Name>NLC.CPC.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NLC.CPC.IRepository\NLC.CPC.IRepository.csproj">
       <Project>{77D4FAEC-3168-46EE-A9AF-6AD33F678C22}</Project>
       <Name>NLC.CPC.IRepository</Name>

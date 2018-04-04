@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLC.CPC.Enum", "NLC.CPC.Enu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLC.CPC.Repository", "NLC.CPC.Repository\NLC.CPC.Repository.csproj", "{90A21A20-41C4-4E30-B88A-210500447088}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp2", "WpfApp2\WpfApp2.csproj", "{03EB6E01-BDD5-48BD-919E-6DF422E34D57}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{90A21A20-41C4-4E30-B88A-210500447088}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90A21A20-41C4-4E30-B88A-210500447088}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90A21A20-41C4-4E30-B88A-210500447088}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03EB6E01-BDD5-48BD-919E-6DF422E34D57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03EB6E01-BDD5-48BD-919E-6DF422E34D57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03EB6E01-BDD5-48BD-919E-6DF422E34D57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03EB6E01-BDD5-48BD-919E-6DF422E34D57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

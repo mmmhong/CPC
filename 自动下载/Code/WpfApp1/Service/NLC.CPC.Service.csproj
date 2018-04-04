@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Service\Migration.cs" />
     <Compile Include="Service\Download.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

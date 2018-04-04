@@ -18,7 +18,7 @@ namespace NLC.CPC.Service
         GetRequest getRequest = new GetRequest();
         JsonParse jsonParse = new JsonParse();
         SimulationRequest SR = new SimulationRequest();
-        MQHelper MQ = new MQHelper();
+        MQSend MQ = new MQSend();
 
         /// <summary>
         /// 构造函数
@@ -27,11 +27,6 @@ namespace NLC.CPC.Service
         public Download(IDAL sqlDAL)
         {
             this._idal = sqlDAL;
-        }
-
-        public string test()
-        {
-            return this._idal.test() + "abc";
         }
 
         /// <summary>
@@ -49,7 +44,7 @@ namespace NLC.CPC.Service
                 List<string> IDList = jsonParse.PatientListParse(responseString);//调用解析方法
                 this._idal.SavePatientList(IDList);//调用存储方法
             }
-            catch (Exception)
+            catch (Exception E)
             {
                 return false;
             }
@@ -112,11 +107,12 @@ namespace NLC.CPC.Service
                 }
                 MQ.mq.SendMessage(v.PatientID);//将保存好的患者ID发送到消息队列
             }
-
-
-
-
             return true;
+        }
+
+        public string test()
+        {
+            return this._idal.test() + "abc";
         }
     }
 }

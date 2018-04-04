@@ -12,7 +12,7 @@ namespace test0001
         public int ID { get; set; }
         public int RecordID { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string Name { get; set; }
     }
 }

@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Context\SourceDBContext.cs" />
     <Compile Include="Context\TargetDBContext.cs" />
+    <Compile Include="Model\HelpModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SourceModel\Data.cs" />
     <Compile Include="SourceModel\FieldRelationship.cs" />

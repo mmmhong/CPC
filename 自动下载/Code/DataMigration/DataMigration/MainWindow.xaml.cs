@@ -27,17 +27,7 @@ namespace DataMigration
             d.DoMigration();
         }
 
-        private void Btn_DownloadRecord_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Btn_Exit_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Btn_Test_Click(object sender, RoutedEventArgs e)
         {
 
         }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Common.Model
+namespace Common.SourceModel
 {
     public class Data
     {

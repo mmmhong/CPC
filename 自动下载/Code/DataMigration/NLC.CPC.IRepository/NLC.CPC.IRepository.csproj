@@ -43,5 +43,11 @@
     <Compile Include="IDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NLC.CPC.Infrastructure\NLC.CPC.Infrastructure.csproj">
+      <Project>{F4B0B050-108C-4CB3-9855-2524CAE68706}</Project>
+      <Name>NLC.CPC.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

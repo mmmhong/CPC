@@ -21,7 +21,7 @@ namespace NLC.CPC.MQ
                 Consumer.Client = "MoveMove";
                 Consumer.Config = new BusinessMQConfig()
                 {
-                    ManageConnectString = "server=192.168.4.48;Initial Catalog=dyd_bs_MQ_manage;User ID=sa;Password=123456;"
+                    ManageConnectString = "server=192.168.4.69;Initial Catalog=dyd_bs_MQ_manage;User ID=sa;Password=123456;"
                 };
                 Consumer.MaxReceiveMQThread = 1;
                 Consumer.MQPath = "maohong";

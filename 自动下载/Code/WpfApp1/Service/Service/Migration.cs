@@ -1,5 +1,6 @@
-﻿using NLC.CPC.IRepository;
-using NLC.CPC.IService;
+﻿using BSF.BaseService.BusinessMQ;
+using IService;
+using NLC.CPC.IRepository;
 using NLC.CPC.MQ;
 using System;
 using System.Collections.Generic;
@@ -7,12 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NLC.CPC.Service
+namespace Service
 {
     public class Migration : IMigration
     {
         private IDAL _idal;
-        public MQHelper MQ = new MQHelper();
+        public MQReceive MQ = new MQReceive();
 
         public Migration(IDAL dal)
         {
@@ -39,38 +40,18 @@ namespace NLC.CPC.Service
             {
                 return false;
             }
-
         }
 
         public void MirgrationById(string id)
         {
+            //if(_idal.GetState(id)==1)
+            //{
+            //    return;
+            //}
             var relation = _idal.GetFieldRelation();
             string recoid = _idal.GetDataByID(id, relation);
             _idal.SaveData(recoid, id);
             _idal.ChangeState(id);
         }
-
-        public void test()
-        {
-            try
-            {
-                MQ.Run();
-                MQ.Consumer.RegisterReceiveMQListener<string>((r) =>
-                {
-                    test2(r.ObjMsg);
-                    r.MarkFinished();
-                }); MQ.Run();
-            }
-            catch (Exception ex)
-            {
-            }
-        }
-
-        public void test2(string id)
-        {
-            string str = id;
-        }
-
-
     }
 }
