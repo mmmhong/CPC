@@ -42,18 +42,22 @@ namespace Service
             }
         }
 
+        /// <summary>
+        /// 根据患者ID进行转移
+        /// </summary>
+        /// <param name="id"></param>
         public void MirgrationById(string id)
         {
-            //if(_idal.GetState(id)==1)
-            //{
-            //    return;
-            //}
             var relation = _idal.GetFieldRelation();
             string recoid = _idal.GetDataByID(id, relation);
             _idal.SaveData(recoid, id);
             _idal.ChangeState(id);
         }
 
+        /// <summary>
+        /// 清空消息队列
+        /// </summary>
+        /// <returns></returns>
         public bool ClearMQ()
         {
             try
@@ -64,13 +68,13 @@ namespace Service
                     string str = r.ObjMsg;
                     r.MarkFinished();
                 });
-                MQ.Dispose();
-                return true;
+                MQ.CloseReceiveMessage();
             }
             catch (Exception ex)
             {
                 return false;
             }
+            return true;
         }
     }
 }

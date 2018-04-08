@@ -13,6 +13,7 @@ using System.Configuration;
 using System.IO;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using System.Xml;
@@ -37,37 +38,8 @@ namespace DownloadUI
             InitializeComponent();
             ShowConfig();
             Register();//调用注册方法
-            ThreadPool.SetMaxThreads(100, 10);
         }
 
-        private void test(object state)
-        {
-            this.Dispatcher.Invoke(new Action(() =>
-            {
-                if (Cookie.Text.Trim() == "" || sDBUserName.Text.Trim() == "" || sDBPwd.Password.Trim() == "" || sDBName.Text.Trim() == "" || sDBSource.Text.Trim() == "")
-                {
-                    MessageBox.Show("都填全了吗！！");
-                    return;
-                }
-                //存储配置
-                SaveAppSettings();
-
-                //创建一个新的生命周期范围
-                using (var scope = Container.BeginLifetimeScope())
-                {
-                    Thread.Sleep(100);
-                    var d = scope.Resolve<IDownload>();//解析接口的实例
-                    if (d.downloadPatient())//调用下载Service层下载患者列表方法
-                    {
-                        MessageBox.Show("患者列表下载完成！");
-                    }
-                    else
-                    {
-                        MessageBox.Show("失败");
-                    }
-                }
-            }));
-        }
         /// <summary>
         /// 下载患者列表
         /// </summary>
@@ -75,8 +47,60 @@ namespace DownloadUI
         /// <param name="e"></param>
         private void Btn_DownloadPatient_Click(object sender, RoutedEventArgs e)
         {
-            ThreadPool.QueueUserWorkItem(new WaitCallback(test));
+            new Thread(o =>
+            {
+                this.Dispatcher.Invoke(() =>
+                {
+                    try
+                    {
+                        if (Cookie.Text.Trim() == "" || sDBUserName.Text.Trim() == "" || sDBPwd.Password.Trim() == "" || sDBName.Text.Trim() == "" || sDBSource.Text.Trim() == "")
+                        {
+                            DoEvent();
+                            MessageBox.Show("都填全了吗！！");
+                            return;
+                        }
+                        //存储配置
+                        SaveAppSettings();
 
+                        //创建一个新的生命周期范围
+                        using (var scope = Container.BeginLifetimeScope())
+                        {
+                            Thread.Sleep(100);
+                            var d = scope.Resolve<IDownload>();//解析接口的实例
+                            if (d.downloadPatient())//调用下载Service层下载患者列表方法
+                            {
+                                MessageBox.Show("患者列表下载完成！");
+                            }
+                            else
+                            {
+                                MessageBox.Show("失败");
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("错误");
+                    }
+                });
+            })
+            { IsBackground = true }.Start();
+        }
+
+        /// <summary>
+        /// 刷新页面
+        /// </summary>
+        public void DoEvent()
+        {
+            DispatcherFrame frame = new DispatcherFrame();
+            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background,
+                new DispatcherOperationCallback(delegate (object f)
+                {
+                    ((DispatcherFrame)f).Continue = false;
+
+                    return null;
+                }
+                    ), frame);
+            Dispatcher.PushFrame(frame);
         }
 
         /// <summary>
@@ -98,9 +122,7 @@ namespace DownloadUI
             {
                 MessageBox.Show("病历下载完成");
             }
-
         }
-
 
         /// <summary>
         /// 测试连接
@@ -121,7 +143,6 @@ namespace DownloadUI
         {
             this.Close();
         }
-
 
         #region 自定义方法
 

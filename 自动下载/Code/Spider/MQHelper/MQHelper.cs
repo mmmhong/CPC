@@ -1,6 +1,7 @@
 ﻿using BSF.BaseService.BusinessMQ.Common;
 using BSF.BaseService.BusinessMQ.Consumer;
 using BSF.BaseService.BusinessMQ.Producter;
+using NLC.CPC.Infrastructure.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,31 +15,62 @@ namespace NLC.CPC.MQ
         public ProducterProvider mq;
         public MQSend()
         {
-                mq = ProducterPoolHelper.GetPool(new BusinessMQConfig()
+            mq = ProducterPoolHelper.GetPool(new BusinessMQConfig()
             {
-                ManageConnectString = "server=192.168.4.87;Initial Catalog=dyd_bs_MQ_manage;User ID=sa;Password=123456;"
-            }, "maohong");
+                ManageConnectString = GetConfig.GetManagerConnectStr()
+            }, GetConfig.GetMqPath());
         }
     }
 
     public class MQReceive : BSF.BaseService.TaskManager.BaseDllTask
+        
     {
         public ConsumerProvider Consumer;
 
         public override void Run()
         {
-            if (Consumer == null)
+            try
             {
-                Consumer = new ConsumerProvider();
-                Consumer.Client = "DataMove";
-                Consumer.Client = "MoveMove";
-                Consumer.Config = new BusinessMQConfig()
+                if (Consumer == null)
                 {
-                    ManageConnectString = "server=192.168.4.87;Initial Catalog=dyd_bs_MQ_manage;User ID=sa;Password=123456;"
-                };
-                Consumer.MaxReceiveMQThread = 1;
-                Consumer.MQPath = "maohong";
-                Consumer.PartitionIndexs = new List<int>() { 1 };
+                    Consumer = new ConsumerProvider();
+                    Consumer.Client = "DataMove";
+                    Consumer.ClientName = "MoveMove";
+                    string str = GetConfig.GetManagerConnectStr();
+
+                    Consumer.Config = new BusinessMQConfig()
+                    {
+                        ManageConnectString = GetConfig.GetManagerConnectStr()
+                    };
+                    Consumer.MaxReceiveMQThread = 1;
+                    Consumer.MQPath = GetConfig.GetMqPath();
+                    Consumer.PartitionIndexs = new List<int>() { 1 };
+                }
+            }
+            catch (Exception e)
+            {
+                string str = e.Message;
+            }
+        }
+
+        /// <summary>
+        /// 关闭消息队列
+        /// </summary>
+        public void CloseReceiveMessage()
+        {
+            try
+            {
+                if (Consumer != null)
+                {
+                    Consumer.Dispose();
+                    Consumer = null;
+                }
+                base.Dispose();
+            }
+            catch (Exception e)
+            {
+                string str = e.Message;
+                Consumer = null;
             }
         }
     }

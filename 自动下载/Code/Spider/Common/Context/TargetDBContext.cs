@@ -1,4 +1,5 @@
 ﻿using Common.TargetModel;
+using NLC.CPC.Infrastructure.Common;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -12,8 +13,9 @@ namespace Common.Context
 {
     public class TargetDBContext : DbContext
     {
-        public TargetDBContext() : base("TargetContext")
+        public TargetDBContext() : base(GetConfig.GetTargetDBConnStr())
         {
+           
         }
         static TargetDBContext()
         {

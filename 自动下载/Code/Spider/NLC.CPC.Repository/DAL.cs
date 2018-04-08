@@ -58,6 +58,10 @@ namespace NLC.CPC.Repository
             {
                 //插入重复值
             }
+            catch(Exception ex)
+            {
+                string str = ex.Message;
+            }
             return true;
         }
 

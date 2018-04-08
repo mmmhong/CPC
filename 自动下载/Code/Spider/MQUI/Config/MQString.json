@@ -1,1 +1,4 @@
-﻿
+﻿{
+  "ManagerConnectionString": "server=192.168.4.87;Initial Catalog=dyd_bs_MQ_manage;User ID=sa;Password=123456",
+  "mqpath": "maohong"
+}

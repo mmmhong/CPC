@@ -1,5 +1,5 @@
-﻿using Common.Common;
-using Common.SourceModel;
+﻿using Common.SourceModel;
+using NLC.CPC.Infrastructure.Common;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,7 +13,8 @@ namespace Common.Context
 {
     public class SourceDBContext : DbContext
     {
-        public SourceDBContext() : base("SourceContext")
+        
+        public SourceDBContext() : base(GetConfig.GetSourceDBConnStr())
         {
             var d = Database;
         }

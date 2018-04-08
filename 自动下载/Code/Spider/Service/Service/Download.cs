@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using NLC.CPC.Infrastructure;
+using NLC.CPC.Infrastructure.Common;
 using NLC.CPC.IRepository;
 using NLC.CPC.IService;
 using NLC.CPC.MQ;

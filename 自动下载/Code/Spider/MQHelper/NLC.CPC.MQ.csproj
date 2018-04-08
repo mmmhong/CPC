@@ -49,5 +49,11 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\NLC.CPC.Infrastructure.csproj">
+      <Project>{D4C7B5E8-921F-4B01-AC9D-4B5B8836A12D}</Project>
+      <Name>NLC.CPC.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NLC.CPC.Infrastructure
+namespace NLC.CPC.Infrastructure.Common
 {
     public class SimulationRequest
     {
