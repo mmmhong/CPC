@@ -1,7 +1,7 @@
-﻿using Common.Context;
-using Common.Model;
-using Common.SourceModel;
-using Common.TargetModel;
+﻿using NLC.CPC.Infrastructure.Context;
+using NLC.CPC.Infrastructure.Model;
+using NLC.CPC.Infrastructure.SourceModel;
+using NLC.CPC.Infrastructure.TargetModel;
 using NLC.CPC.IRepository;
 using System;
 using System.Collections.Generic;
