@@ -43,7 +43,6 @@
             </Border>
 
             <!--#region 按钮-->
-            <Button x:Name="Btn_Test" Content="测试连接" Width="65" Height="37" Canvas.Left="323" Canvas.Top="314" Click="Btn_Test_Click" Template="{DynamicResource mh}"/>
             <Button x:Name="Btn_DownloadPatient" Content="下载患者" Width="65" Height="37" Canvas.Left="82" Canvas.Top="382" Click="Btn_DownloadPatient_Click" Template="{DynamicResource mh}"/>
             <Button x:Name="Btn_DownloadRecord" Content="下载病历" Width="65" Height="37" Canvas.Left="187" Canvas.Top="382" Click="Btn_DownloadRecord_Click" Template="{DynamicResource mh}"/>
             <Button x:Name="Btn_Exit" Content="退出" Width="65" Height="37" Canvas.Left="291" Canvas.Top="382" Click="Btn_Exit_Click" Template="{DynamicResource mh}"/>

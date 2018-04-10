@@ -5,20 +5,11 @@ using NLC.CPC.IRepository;
 using NLC.CPC.Repository;
 using Service;
 using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MQUI
 {
@@ -64,10 +55,21 @@ namespace MQUI
             if (d.ClearMQ())
             {
                 MessageBox.Show("消息队列已清空");
-            }else
+                Restart();
+            }
+            else
             {
                 MessageBox.Show("消息队列错误");
             }
+            Application.Current.Shutdown();
+        }
+
+        public void Restart()
+        {
+            Process p = new Process();
+            p.StartInfo.FileName = System.AppDomain.CurrentDomain.BaseDirectory + "NLC.CPC.MQUI.exe";
+            p.StartInfo.UseShellExecute = false;
+            p.Start();
         }
 
         /// <summary>

@@ -45,62 +45,49 @@ namespace DownloadUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Btn_DownloadPatient_Click(object sender, RoutedEventArgs e)
+        private async void Btn_DownloadPatient_Click(object sender, RoutedEventArgs e)
         {
-            new Thread(o =>
+            if (Cookie.Text.Trim() == "" || sDBUserName.Text.Trim() == "" || sDBPwd.Password.Trim() == "" || sDBName.Text.Trim() == "" || sDBSource.Text.Trim() == "")
             {
-                this.Dispatcher.Invoke(() =>
-                {
-                    try
-                    {
-                        if (Cookie.Text.Trim() == "" || sDBUserName.Text.Trim() == "" || sDBPwd.Password.Trim() == "" || sDBName.Text.Trim() == "" || sDBSource.Text.Trim() == "")
-                        {
-                            DoEvent();
-                            MessageBox.Show("都填全了吗！！");
-                            return;
-                        }
-                        //存储配置
-                        SaveAppSettings();
-
-                        //创建一个新的生命周期范围
-                        using (var scope = Container.BeginLifetimeScope())
-                        {
-                            Thread.Sleep(100);
-                            var d = scope.Resolve<IDownload>();//解析接口的实例
-                            if (d.downloadPatient())//调用下载Service层下载患者列表方法
-                            {
-                                MessageBox.Show("患者列表下载完成！");
-                            }
-                            else
-                            {
-                                MessageBox.Show("失败");
-                            }
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("错误");
-                    }
-                });
-            })
-            { IsBackground = true }.Start();
+                MessageBox.Show("都填全了吗！！");
+            }
+            //存储配置
+            SaveAppSettings();
+            string str = await DownloadPatient();
+            MessageBox.Show(str);
         }
 
         /// <summary>
-        /// 刷新页面
+        /// 自定义下载患者列表方法
         /// </summary>
-        public void DoEvent()
+        /// <returns></returns>
+        public async Task<string> DownloadPatient()
         {
-            DispatcherFrame frame = new DispatcherFrame();
-            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background,
-                new DispatcherOperationCallback(delegate (object f)
-                {
-                    ((DispatcherFrame)f).Continue = false;
-
-                    return null;
-                }
-                    ), frame);
-            Dispatcher.PushFrame(frame);
+            return await Task.Run(() =>
+              {
+                  try
+                  {
+                      MessageBox.Show("已开始下载患者");
+                      //创建一个新的生命周期范围
+                      using (var scope = Container.BeginLifetimeScope())
+                      {
+                          Thread.Sleep(100);
+                          var d = scope.Resolve<IDownload>();//解析接口的实例
+                          if (d.downloadPatient())//调用下载Service层下载患者列表方法
+                          {
+                              return "患者列表下载完成！";
+                          }
+                          else
+                          {
+                              return "下载出错";
+                          }
+                      }
+                  }
+                  catch (Exception e)
+                  {
+                      return e.Message;
+                  }
+              });
         }
 
         /// <summary>
@@ -108,7 +95,7 @@ namespace DownloadUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Btn_DownloadRecord_Click(object sender, RoutedEventArgs e)
+        private async void Btn_DownloadRecord_Click(object sender, RoutedEventArgs e)
         {
             if (Cookie.Text.Trim() == "" || sDBUserName.Text.Trim() == "" || sDBPwd.Password.Trim() == "" || sDBName.Text.Trim() == "" || sDBSource.Text.Trim() == "")
             {
@@ -117,11 +104,37 @@ namespace DownloadUI
             }
             //存储配置
             SaveAppSettings();
-            var d = Container.Resolve<IDownload>();
-            if (d.downloadRecord())
+
+            string str = await DownloadRecord();
+            MessageBox.Show(str);
+        }
+
+        /// <summary>
+        /// 自定义下载病历方法
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> DownloadRecord()
+        {
+            return await Task.Run(() =>
             {
-                MessageBox.Show("病历下载完成");
-            }
+                try
+                {
+                    MessageBox.Show("已开始下载病历");
+                    var d = Container.Resolve<IDownload>();
+                    if (d.downloadRecord())
+                    {
+                        return "病历下载完成";
+                    }
+                    else
+                    {
+                        return "病历下载失败";
+                    }
+                }
+                catch(Exception e)
+                {
+                    return e.Message;
+                }
+            });
         }
 
         /// <summary>
