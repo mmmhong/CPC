@@ -53,6 +53,7 @@ namespace DownloadUI
             }
             //存储配置
             SaveAppSettings();
+            MessageBox.Show("开始下载患者列表");
             string str = await DownloadPatient();
             MessageBox.Show(str);
         }
