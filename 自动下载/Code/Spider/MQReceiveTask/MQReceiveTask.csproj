@@ -4,18 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3E115C35-43C1-4B91-8A0B-2F2D69DA1D7F}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>WpfApp1</RootNamespace>
-    <AssemblyName>WpfApp1</AssemblyName>
+    <ProjectGuid>{17A771F2-9AAF-46DF-A7F1-17C07D846228}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MQReceiveTask</RootNamespace>
+    <AssemblyName>MQReceiveTask</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -25,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,9 +30,16 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="Autofac, Version=4.7.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.7.0\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="BSF.BaseService.DeploymentCommand">
+      <HintPath>.\BSF.BaseService.DeploymentCommand.dll</HintPath>
     </Reference>
     <Reference Include="BSF.Full">
       <HintPath>.\BSF.Full.dll</HintPath>
@@ -51,95 +55,63 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.configuration" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <None Include="Config\MQString.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Task.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <None Include="App.config" />
     <None Include="Config\DownloadConfig.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Config\GetPatientList.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    <None Include="Config\MQString.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NLC.CPC.IDAL\NLC.CPC.IRepository.csproj">
-      <Project>{DE6457DE-6FCC-412E-BE8C-7C409CBEBD58}</Project>
+      <Project>{de6457de-6fcc-412e-be8c-7c409cbebd58}</Project>
       <Name>NLC.CPC.IRepository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NLC.CPC.Infrastructure\NLC.CPC.Infrastructure.csproj">
+      <Project>{b77d6382-dc2d-41da-a288-b9e8c6d642d6}</Project>
+      <Name>NLC.CPC.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NLC.CPC.IService\NLC.CPC.IService.csproj">
-      <Project>{19A177A5-851D-430A-913E-DD69EADB75C8}</Project>
+      <Project>{19a177a5-851d-430a-913e-dd69eadb75c8}</Project>
       <Name>NLC.CPC.IService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NLC.CPC.MQHelper\NLC.CPC.MQ.csproj">
+      <Project>{071410dd-e370-4195-a68f-bbf333390d9d}</Project>
+      <Name>NLC.CPC.MQ</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NLC.CPC.MQUI\NLC.CPC.MQUI.csproj">
+      <Project>{7a999327-9352-4815-86fb-835dab60ff99}</Project>
+      <Name>NLC.CPC.MQUI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NLC.CPC.Repository\NLC.CPC.Repository.csproj">
-      <Project>{90A21A20-41C4-4E30-B88A-210500447088}</Project>
+      <Project>{90a21a20-41c4-4e30-b88a-210500447088}</Project>
       <Name>NLC.CPC.Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\NLC.CPC.Service\NLC.CPC.Service.csproj">
-      <Project>{D2B8316B-1980-4F79-9F2C-249034A6273E}</Project>
+      <Project>{d2b8316b-1980-4f79-9f2c-249034a6273e}</Project>
       <Name>NLC.CPC.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NLC.CPC.UI\NLC.CPC.UI.csproj">
+      <Project>{3e115c35-43c1-4b91-8a0b-2f2d69da1d7f}</Project>
+      <Name>NLC.CPC.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

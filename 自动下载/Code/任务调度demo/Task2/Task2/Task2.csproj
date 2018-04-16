@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D2B8316B-1980-4F79-9F2C-249034A6273E}</ProjectGuid>
+    <ProjectGuid>{67673211-D892-4322-A50A-0421EC385C98}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NLC.CPC.Service</RootNamespace>
-    <AssemblyName>NLC.CPC.Service</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>Task2</RootNamespace>
+    <AssemblyName>Task2</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -30,19 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.7.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.4.7.0\lib\net45\Autofac.dll</HintPath>
+    <Reference Include="BSF.BaseService.DeploymentCommand">
+      <HintPath>.\BSF.BaseService.DeploymentCommand.dll</HintPath>
     </Reference>
     <Reference Include="BSF.Full">
       <HintPath>.\BSF.Full.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,31 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Service\Migration.cs" />
-    <Compile Include="Service\Download.cs" />
+    <Compile Include="DemoTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NLC.CPC.IDAL\NLC.CPC.IRepository.csproj">
-      <Project>{DE6457DE-6FCC-412E-BE8C-7C409CBEBD58}</Project>
-      <Name>NLC.CPC.IRepository</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NLC.CPC.IService\NLC.CPC.IService.csproj">
-      <Project>{19a177a5-851d-430a-913e-dd69eadb75c8}</Project>
-      <Name>NLC.CPC.IService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NLC.CPC.MQHelper\NLC.CPC.MQ.csproj">
-      <Project>{071410DD-E370-4195-A68F-BBF333390D9D}</Project>
-      <Name>NLC.CPC.MQ</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NLC.CPC.Infrastructure\NLC.CPC.Infrastructure.csproj">
-      <Project>{B77D6382-DC2D-41DA-A288-B9E8C6D642D6}</Project>
-      <Name>NLC.CPC.Infrastructure</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

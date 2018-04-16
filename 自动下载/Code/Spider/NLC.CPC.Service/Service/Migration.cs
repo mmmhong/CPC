@@ -24,34 +24,44 @@ namespace Service
         /// 进行数据迁移
         /// </summary>
         /// <returns></returns>
-        public bool DoMigration()
+        public string DoMigration()
         {
+            string str = string.Empty;
             try
             {
                 MQ.Run();
                 MQ.Consumer.RegisterReceiveMQListener<string>((r) =>
                 {
-                    MirgrationById(r.ObjMsg);
+                    str = MirgrationById(r.ObjMsg);
                     r.MarkFinished();
                 });
-                return true;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return false;
+                return str + ":" + e.Message;
             }
+            return "true";
         }
 
         /// <summary>
         /// 根据患者ID进行转移
         /// </summary>
         /// <param name="id"></param>
-        public void MirgrationById(string id)
+        public string MirgrationById(string id)
         {
-            var relation = _idal.GetFieldRelation();
-            string recoid = _idal.GetDataByID(id, relation);
-            _idal.SaveData(recoid, id);
-            _idal.ChangeState(id);
+            try
+            {
+                var relation = _idal.GetFieldRelation();
+                string recoid = _idal.GetDataByID(id, relation);
+                _idal.SaveData(recoid, id);
+                _idal.ChangeState(id);
+                return "true";
+            }
+            catch (Exception e)
+            {
+                BSF.Log.ErrorLog.Write("MirgrationById", e);
+                return "MirgrationById:"+e.Message;
+            }
         }
 
         /// <summary>
@@ -75,6 +85,11 @@ namespace Service
                 return false;
             }
             return true;
+        }
+
+        public string textre()
+        {
+            return "用于任务调度测试";
         }
     }
 }

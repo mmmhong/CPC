@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLC.CPC.Infrastructure", "N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLC.CPC.MQUI", "NLC.CPC.MQUI\NLC.CPC.MQUI.csproj", "{7A999327-9352-4815-86FB-835DAB60FF99}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQReceiveTask", "MQReceiveTask\MQReceiveTask.csproj", "{17A771F2-9AAF-46DF-A7F1-17C07D846228}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,8 +59,15 @@ Global
 		{7A999327-9352-4815-86FB-835DAB60FF99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A999327-9352-4815-86FB-835DAB60FF99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A999327-9352-4815-86FB-835DAB60FF99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17A771F2-9AAF-46DF-A7F1-17C07D846228}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17A771F2-9AAF-46DF-A7F1-17C07D846228}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17A771F2-9AAF-46DF-A7F1-17C07D846228}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17A771F2-9AAF-46DF-A7F1-17C07D846228}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E2998112-6534-4923-AE7B-F31692B71969}
 	EndGlobalSection
 EndGlobal

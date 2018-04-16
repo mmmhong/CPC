@@ -16,7 +16,8 @@ namespace NLC.CPC.Infrastructure.Common
         /// <returns></returns>
         public static string GetCookie()
         {
-            string json = File.ReadAllText("..\\..\\Config\\DownloadConfig.json", Encoding.Default);
+            string path = AppDomain.CurrentDomain.BaseDirectory + "\\Config\\DownloadConfig.json";
+            string json = File.ReadAllText(path, Encoding.Default);
             JObject jo = JObject.Parse(json);
             string cookie = jo["Cookie"].ToString();
             return cookie;
@@ -28,7 +29,8 @@ namespace NLC.CPC.Infrastructure.Common
         /// <returns></returns>
         public static string GetSourceDBConnStr()
         {
-            string json = File.ReadAllText("..\\..\\Config\\DownloadConfig.json", Encoding.Default);
+            string path = AppDomain.CurrentDomain.BaseDirectory + "\\Config\\DownloadConfig.json";
+            string json = File.ReadAllText(path, Encoding.Default);
             JObject jo = JObject.Parse(json);
             jo = JObject.Parse(jo["SourceDB"].ToString());
             string connStr = $"Data Source={jo["DBSource"].ToString()};Initial Catalog={jo["DBName"].ToString()};User ID={jo["DBUserName"].ToString()};Password={jo["DBPwd"].ToString()}";
@@ -41,7 +43,8 @@ namespace NLC.CPC.Infrastructure.Common
         /// <returns></returns>
         public static string GetTargetDBConnStr()
         {
-            string json = File.ReadAllText("..\\..\\Config\\DownloadConfig.json", Encoding.Default);
+            string path = AppDomain.CurrentDomain.BaseDirectory + "\\Config\\DownloadConfig.json";
+            string json = File.ReadAllText(path, Encoding.Default);
             JObject jo = JObject.Parse(json);
             jo = JObject.Parse(jo["TargetDB"].ToString());
             string connStr = $"Data Source={jo["DBSource"].ToString()};Initial Catalog={jo["DBName"].ToString()};User ID={jo["DBUserName"].ToString()};Password={jo["DBPwd"].ToString()}";
@@ -54,7 +57,8 @@ namespace NLC.CPC.Infrastructure.Common
         /// <returns></returns>
         public static string GetManagerConnectStr()
         {
-            string json = File.ReadAllText("..\\..\\Config\\MQString.json", Encoding.Default);
+            string path = AppDomain.CurrentDomain.BaseDirectory + "\\Config\\MQString.json";
+            string json = File.ReadAllText(path, Encoding.Default);
             JObject jo = JObject.Parse(json);
             string str = jo["ManagerConnectionString"].ToString();
             return jo["ManagerConnectionString"].ToString();
@@ -62,7 +66,8 @@ namespace NLC.CPC.Infrastructure.Common
 
         public static string GetMqPath()
         {
-            string json = File.ReadAllText("..\\..\\Config\\MQString.json", Encoding.Default);
+            string path = AppDomain.CurrentDomain.BaseDirectory + "\\Config\\MQString.json";
+            string json = File.ReadAllText(path, Encoding.Default);
             JObject jo = JObject.Parse(json);
             return jo["mqpath"].ToString();
         }

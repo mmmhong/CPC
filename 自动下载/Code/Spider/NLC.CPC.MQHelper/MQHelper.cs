@@ -36,7 +36,6 @@ namespace NLC.CPC.MQ
                     Consumer = new ConsumerProvider();
                     Consumer.Client = "DataMove";
                     Consumer.ClientName = "MoveMove";
-                    string str = GetConfig.GetManagerConnectStr();
 
                     Consumer.Config = new BusinessMQConfig()
                     {
