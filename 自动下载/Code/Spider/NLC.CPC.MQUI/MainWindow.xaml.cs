@@ -9,7 +9,6 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MQUI
@@ -35,7 +34,7 @@ namespace MQUI
             if (str.Equals("启动消息队列"))
             {
                 var d = Container.Resolve<IMigration>();
-                d.DoMigration();
+              //  d.DoMigration();
                 //启动消息队列
                 DoMigration.Content = "已启动";
             }
@@ -53,15 +52,15 @@ namespace MQUI
         private void ClearMQ_Click(object sender, RoutedEventArgs e)
         {
             var d = Container.Resolve<IMigration>();
-            if (d.ClearMQ())
-            {
-                MessageBox.Show("消息队列已清空");
-                Restart();
-            }
-            else
-            {
-                MessageBox.Show("消息队列错误");
-            }
+            //if (d.ClearMQ())
+            //{
+            //    MessageBox.Show("消息队列已清空");
+            //    Restart();
+            //}
+            //else
+            //{
+            //    MessageBox.Show("消息队列错误");
+            //}
             Application.Current.Shutdown();
         }
 
@@ -122,6 +121,7 @@ namespace MQUI
                 BSF.Config.BSFConfig.ProjectName = projectName;
                 BSF.Config.BSFConfig.ConfigManagerConnectString = configManagerConnectString;
 
+                //从配置中心获取配置
                 sDBName.Text = ConfigManagerHelper.Get<string>("sDBName");
                 sDBPwd.Password = ConfigManagerHelper.Get<string>("sDBPwd");
                 sDBUserName.Text = ConfigManagerHelper.Get<string>("sDBUserName");

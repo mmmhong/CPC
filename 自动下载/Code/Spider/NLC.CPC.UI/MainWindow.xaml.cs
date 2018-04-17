@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using BSF.BaseService.ConfigManager;
 using IService;
 using Newtonsoft.Json.Linq;
 using NLC.CPC.IRepository;
@@ -8,17 +7,10 @@ using NLC.CPC.Repository;
 using NLC.CPC.Service;
 using Service;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
 using System.IO;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
-using System.Xml;
-using System.Xml.Linq;
 
 namespace DownloadUI
 {
@@ -28,11 +20,6 @@ namespace DownloadUI
     public partial class MainWindow : Window
     {
         private static Autofac.IContainer Container { get; set; }
-
-        /// <summary>
-        /// 数据库连接字符串
-        /// </summary>
-        private string DBConnStr = string.Empty;
 
         public MainWindow()
         {
@@ -48,7 +35,6 @@ namespace DownloadUI
         /// <param name="e"></param>
         private async void Btn_DownloadPatient_Click(object sender, RoutedEventArgs e)
         {
-          
             string str = await DownloadPatient();
             MessageBox.Show(str);
         }
@@ -63,13 +49,11 @@ namespace DownloadUI
               {
                   try
                   {
-                      MessageBox.Show("已开始下载患者");
-                      //创建一个新的生命周期范围
-                      using (var scope = Container.BeginLifetimeScope())
+                      MessageBox.Show("开始下载患者");
+                      using (var scope = Container.BeginLifetimeScope()) //创建一个新的生命周期范围
                       {
-                          Thread.Sleep(100);
-                          var d = scope.Resolve<IDownload>();//解析接口的实例
-                          d.downloadPatient();//调用下载Service层下载患者列表方法
+                          var d = scope.Resolve<IDownload>();   //解析接口的实例
+                          d.downloadPatient();                  //调用下载Service层下载患者列表方法
                           return "患者列表下载完成！";
                       }
                   }
@@ -87,7 +71,6 @@ namespace DownloadUI
         /// <param name="e"></param>
         private async void Btn_DownloadRecord_Click(object sender, RoutedEventArgs e)
         {
-            
             string str = await DownloadRecord();
             MessageBox.Show(str);
         }
@@ -129,16 +112,18 @@ namespace DownloadUI
         /// <summary>
         /// 从Config文件中读取配置中心配置字符串，再从配置中心读取配置显示在屏幕上
         /// </summary>
-        public void LoadConfig()
+        private void LoadConfig()
         {
-            BSF.Config.BSFConfig.ProjectName = "Spider";
-            BSF.Config.BSFConfig.ConfigManagerConnectString = "server = 192.168.4.87; Initial Catalog = dyd_bs_configmanager; User ID = sa; Password = 123456; ";
+            string path = AppDomain.CurrentDomain.BaseDirectory+"\\Config\\ConfigCenter.json";
+            string json = File.ReadAllText(path, Encoding.Default);
+            BSF.Config.BSFConfig.ProjectName = (JObject.Parse(json))["ProjectName"].ToString();
+            BSF.Config.BSFConfig.ConfigManagerConnectString = (JObject.Parse(json))["ConfigManagerConnectString"].ToString();
         }
 
         /// <summary>
         /// 注册所需的类型
         /// </summary>
-        public void Register()
+        private void Register()
         {
             try
             {

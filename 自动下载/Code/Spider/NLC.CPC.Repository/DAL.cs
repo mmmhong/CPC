@@ -5,10 +5,7 @@ using NLC.CPC.Infrastructure.TargetModel;
 using NLC.CPC.IRepository;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NLC.CPC.Repository
 {
@@ -76,40 +73,23 @@ namespace NLC.CPC.Repository
                            select f.ID;
                     var fieldID = temp.ToList();
 
-
-                    context.Data.Add(new Data
+                    if (fieldID.Count != 0)
                     {
-                        FieldID = fieldID[0],
-                        PatientID = id,
-                        FieldValue = v.Value
-                    });
-                    context.SaveChanges();
+                        context.Data.Add(new Data
+                        {
+                            FieldID = fieldID[0],
+                            PatientID = id,
+                            FieldValue = v.Value
+                        });
+                        context.SaveChanges();
+                    }
                 }
             }
             return true;
         }
 
         /// <summary>
-        /// 获取字段关系表
-        /// </summary>
-        /// <returns></returns>
-        public List<HelpModel> GetFieldRelation()
-        {
-            List<HelpModel> relation = new List<HelpModel>();
-            using (var sContext = new SourceDBContext())
-            {
-                var temp = from fr in sContext.FieldRelationship
-                           select new { fr.Name1, fr.Name2 };
-                foreach (var s in temp)
-                {
-                    relation.Add(new HelpModel(s.Name1, s.Name2));
-                }
-            }
-            return relation;
-        }
-
-        /// <summary>
-        /// 获取患者病历解析格式
+        /// 根据字段关系表解析患者病历
         /// </summary>
         /// <param name="id"></param>
         /// <param name="fieldRelation"></param>
@@ -148,7 +128,7 @@ namespace NLC.CPC.Repository
         }
 
         /// <summary>
-        /// 保存患者病历
+        /// 患者病历保存到迁移数据库
         /// </summary>
         /// <param name="record"></param>
         /// <param name="id"></param>
@@ -175,6 +155,25 @@ namespace NLC.CPC.Repository
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// 获取字段关系表
+        /// </summary>
+        /// <returns></returns>
+        public List<HelpModel> GetFieldRelation()
+        {
+            List<HelpModel> relation = new List<HelpModel>();
+            using (var sContext = new SourceDBContext())
+            {
+                var temp = from fr in sContext.FieldRelationship
+                           select new { fr.Name1, fr.Name2 };
+                foreach (var s in temp)
+                {
+                    relation.Add(new HelpModel(s.Name1, s.Name2));
+                }
+            }
+            return relation;
         }
 
         /// <summary>

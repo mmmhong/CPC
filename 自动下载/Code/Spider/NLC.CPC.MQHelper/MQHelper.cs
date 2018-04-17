@@ -4,9 +4,6 @@ using BSF.BaseService.BusinessMQ.Producter;
 using NLC.CPC.Infrastructure.Common;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NLC.CPC.MQ
 {
@@ -18,15 +15,14 @@ namespace NLC.CPC.MQ
         {
             mq = ProducterPoolHelper.GetPool(new BusinessMQConfig()
             {
-                ManageConnectString = GetConfig.GetManagerConnectStr
-            }, GetConfig.GetMqPath);
+                ManageConnectString = GetConfig.ManagerConnectStr
+            }, GetConfig.MqPath);
         }
     }
 
     public class MQReceive : BSF.BaseService.TaskManager.BaseDllTask
     {
         public ConsumerProvider Consumer;
-        private GetConfig getConfig = new GetConfig();
 
         public override void Run()
         {
@@ -40,10 +36,10 @@ namespace NLC.CPC.MQ
 
                     Consumer.Config = new BusinessMQConfig()
                     {
-                        ManageConnectString = GetConfig.GetManagerConnectStr
+                        ManageConnectString = GetConfig.ManagerConnectStr
                     };
                     Consumer.MaxReceiveMQThread = 1;
-                    Consumer.MQPath = GetConfig.GetMqPath;
+                    Consumer.MQPath = GetConfig.MqPath;
                     Consumer.PartitionIndexs = new List<int>() { 1 };
                 }
             }

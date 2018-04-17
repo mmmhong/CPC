@@ -1,9 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NLC.CPC.Infrastructure.Common
 {
@@ -104,10 +100,5 @@ namespace NLC.CPC.Infrastructure.Common
             }
             return fieldAndValueList;
         }
-
-        //public string CutRecord()
-        //{
-
-        //}
     }
 }

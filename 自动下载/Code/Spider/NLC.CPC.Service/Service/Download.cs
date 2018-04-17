@@ -1,14 +1,9 @@
-﻿using Autofac;
-using NLC.CPC.Infrastructure.Common;
+﻿using NLC.CPC.Infrastructure.Common;
 using NLC.CPC.IRepository;
 using NLC.CPC.IService;
 using NLC.CPC.MQ;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NLC.CPC.Service
 {
@@ -32,9 +27,6 @@ namespace NLC.CPC.Service
         /// <summary>
         /// 下载患者列表并存储到数据库
         /// </summary>
-        /// <param name="cookie"></param>
-        /// <param name="connStr"></param>
-        /// <returns></returns>
         public void downloadPatient()
         {
             HttpWebRequest request = getRequest.GetPatientRequest();
@@ -44,9 +36,8 @@ namespace NLC.CPC.Service
         }
 
         /// <summary>
-        /// 下载患者病历并存储到数据库
+        /// 载患者病历并存储到数据库
         /// </summary>
-        /// <returns></returns>
         public void downloadRecord()
         {
             GetRequest getRequest = new GetRequest();
@@ -60,6 +51,7 @@ namespace NLC.CPC.Service
                     {
                         string resStr = SR.GetResponseString(r);
                         string recordName = null;
+
                         if (r.Address.ToString().Contains("Diagnosis"))
                         {
                             recordName = "DiagTreatModel";
@@ -68,6 +60,7 @@ namespace NLC.CPC.Service
                         {
                             recordName = "OutModel";
                         }
+
                         var recordList = jsonParse.RecordParse(resStr, recordName);
                         if (recordName == null)
                         {

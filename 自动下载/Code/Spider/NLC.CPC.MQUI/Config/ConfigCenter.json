@@ -1,0 +1,4 @@
+﻿{
+  "ProjectName": "Spider",
+  "ConfigManagerConnectString": "server=192.168.4.87;Initial Catalog=dyd_bs_configmanager;User ID=sa;Password=123456;"
+}

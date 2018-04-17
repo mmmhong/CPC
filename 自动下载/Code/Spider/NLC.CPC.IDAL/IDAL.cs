@@ -1,10 +1,6 @@
 ﻿using NLC.CPC.Infrastructure.Model;
 using NLC.CPC.Infrastructure.SourceModel;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NLC.CPC.IRepository
 {

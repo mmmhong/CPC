@@ -1,26 +1,24 @@
 ﻿using Autofac;
-using BSF.BaseService.BusinessMQ.Common;
 using BSF.BaseService.BusinessMQ.Consumer;
-using IService;
-using Newtonsoft.Json.Linq;
-using NLC.CPC.IRepository;
-using NLC.CPC.Repository;
-using Service;
 using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace MQReceiveTask
+namespace 哎呦我去任务调度底层错误错个头啊
 {
-    public class Task : BSF.BaseService.TaskManager.BaseDllTask
+    class Program
     {
+        static void Main(string[] args)
+        {
+
+
         private static IContainer Container { get; set; }
 
         public ConsumerProvider Consumer;
 
-        public override void Run()
-        {
+      
             Register();
             Receive();
             ConfigCenter();
@@ -46,7 +44,7 @@ namespace MQReceiveTask
             {
                 this.OpenOperator.Error("错误：", new Exception(e.Message));
             }
-        }
+   
 
         public void Register()
         {
@@ -78,7 +76,7 @@ namespace MQReceiveTask
 
                     Consumer.Config = new BusinessMQConfig()
                     {
-                        ManageConnectString = "server=192.168.4.117;Initial Catalog=dyd_bs_MQ_manage;User ID=sa;Password=123456;"
+                        ManageConnectString = "server=192.168.4.91;Initial Catalog=dyd_bs_MQ_manage;User ID=sa;Password=123456;"
                     };
                     Consumer.MaxReceiveMQThread = 1;
                     Consumer.MQPath = "maohong";
@@ -93,12 +91,8 @@ namespace MQReceiveTask
 
         private void ConfigCenter()
         {
-            //BSF.Config.BSFConfig.ProjectName = "Spider";
-            //BSF.Config.BSFConfig.ConfigManagerConnectString = "server =192.168.4.117; Initial Catalog = dyd_bs_configmanager; User ID = sa; Password = 123456; ";
-            string path = AppDomain.CurrentDomain.BaseDirectory + "\\Config\\ConfigCenter.json";
-            string json = File.ReadAllText(path, Encoding.Default);
-            BSF.Config.BSFConfig.ProjectName = (JObject.Parse(json))["ProjectName"].ToString();
-            BSF.Config.BSFConfig.ConfigManagerConnectString = (JObject.Parse(json))["ConfigManagerConnectString"].ToString();
+            BSF.Config.BSFConfig.ProjectName = "Spider";
+            BSF.Config.BSFConfig.ConfigManagerConnectString = "server =192.168.4.91; Initial Catalog = dyd_bs_configmanager; User ID = sa; Password = 123456; ";
         }
     }
 }

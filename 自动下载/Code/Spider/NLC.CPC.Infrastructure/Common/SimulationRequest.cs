@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace NLC.CPC.Infrastructure.Common
 {
     public class SimulationRequest
     {
+        /// <summary>
+        /// 获取response解析后的字符串
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public string GetResponseString(HttpWebRequest request)
         {
             HttpWebResponse res;

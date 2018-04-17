@@ -1,23 +1,14 @@
 ﻿using BSF.BaseService.ConfigManager;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NLC.CPC.Infrastructure.Common
 {
     public class GetConfig
     {
-
-
         /// <summary>
-        /// 获取Cookie配置
+        /// Cookie配置
         /// </summary>
         /// <returns></returns>
-        public static string GetCookie
+        public static string Cookie
         {
             get { return ConfigManagerHelper.Get<string>("Cookie"); }
         }
@@ -25,8 +16,7 @@ namespace NLC.CPC.Infrastructure.Common
         /// <summary>
         /// 获取源数据库连接配置
         /// </summary>
-        /// <returns></returns>
-        public static string GetSourceDBConnStr
+        public static string SourceDBConnStr
         {
             get
             {
@@ -41,10 +31,9 @@ namespace NLC.CPC.Infrastructure.Common
         }
 
         /// <summary>
-        /// 获取目标数据库连接配置
+        /// 目标数据库连接配置
         /// </summary>
-        /// <returns></returns>
-        public static string GetTargetDBConnStr
+        public static string TargetDBConnStr
         {
             get
             {
@@ -59,20 +48,25 @@ namespace NLC.CPC.Infrastructure.Common
         }
 
         /// <summary>
-        /// 获取消息队列连接字符串
+        /// 消息队列连接字符串
         /// </summary>
-        /// <returns></returns>
-        public static string GetManagerConnectStr
+        public static string ManagerConnectStr
         {
             get { return ConfigManagerHelper.Get<string>("ManagerConnectionString"); }
         }
 
-        public static string GetMqPath
+        /// <summary>
+        /// 消息队列名称
+        /// </summary>
+        public static string MqPath
         {
             get { return ConfigManagerHelper.Get<string>("mqpath"); }
         }
 
-        public static string GetPostString
+        /// <summary>
+        /// 患者请求字符串
+        /// </summary>
+        public static string PostString
         {
             get { return ConfigManagerHelper.Get<string>("postString"); }
         }

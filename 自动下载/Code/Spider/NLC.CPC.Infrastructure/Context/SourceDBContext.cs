@@ -1,19 +1,14 @@
 ﻿using NLC.CPC.Infrastructure.Common;
 using NLC.CPC.Infrastructure.SourceModel;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NLC.CPC.Infrastructure.Context
 {
     public class SourceDBContext : DbContext
     {
-        public SourceDBContext() : base(GetConfig.GetSourceDBConnStr)
+        public SourceDBContext() : base(GetConfig.SourceDBConnStr)
         {
         }
         static SourceDBContext()

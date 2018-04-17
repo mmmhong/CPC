@@ -1,17 +1,15 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.IO;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace NLC.CPC.Infrastructure.Common
 {
     public class GetRequest
     {
+        /// <summary>
+        /// 配置获取患者列表的request请求
+        /// </summary>
+        /// <returns></returns>
         public HttpWebRequest GetPatientRequest()
         {
             HttpWebRequest request = null;
@@ -19,7 +17,7 @@ namespace NLC.CPC.Infrastructure.Common
             //Request配置
             request = (HttpWebRequest)HttpWebRequest.Create("http://data.chinacpc.org/patient/getPatientList");
             request.Accept = "application/json,text/plain,*/*";
-            request.Headers.Add("Cookie", GetConfig.GetCookie);//填写Cookie
+            request.Headers.Add("Cookie", GetConfig.Cookie);//填写Cookie
             request.ContentType = "application/json;charset=UTF-8";
             request.Method = "POST";
             request.Host = "data.chinacpc.org";
@@ -29,7 +27,7 @@ namespace NLC.CPC.Infrastructure.Common
 
             //poststring从json文件中获取
 
-            string postString = GetConfig.GetPostString;
+            string postString = GetConfig.PostString;
 
             var data = Encoding.ASCII.GetBytes(postString);
             request.ContentLength = data.Length;
@@ -38,9 +36,13 @@ namespace NLC.CPC.Infrastructure.Common
                 stream1.Write(data, 0, data.Length);
             }
             return request;
-
         }
 
+        /// <summary>
+        /// 根据ID配置获取患者病历的request请求
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public List<HttpWebRequest> GetRecordRequestById(string id)
         {
             List<HttpWebRequest> requestList = new List<HttpWebRequest>();
@@ -56,7 +58,7 @@ namespace NLC.CPC.Infrastructure.Common
                 request.Method = "GET";
                 request.Accept = "application/json, text/plain, */*";
                 request.KeepAlive = true;
-                request.Headers.Add("Cookie", GetConfig.GetCookie);
+                request.Headers.Add("Cookie", GetConfig.Cookie);
                 request.Host = "data.chinacpc.org";
                 request.Referer = "http://data.chinacpc.org/patient/crfplane?patientId=1384d418-be23-48ad-b503-b7f45517f924";
                 request.UserAgent = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Mobile Safari/537.36";

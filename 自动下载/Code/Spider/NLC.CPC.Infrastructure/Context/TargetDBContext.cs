@@ -1,19 +1,14 @@
 ﻿using NLC.CPC.Infrastructure.Common;
 using NLC.CPC.Infrastructure.TargetModel;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NLC.CPC.Infrastructure.Context
 {
     public class TargetDBContext : DbContext
     {
-        public TargetDBContext() : base(GetConfig.GetTargetDBConnStr)
+        public TargetDBContext() : base(GetConfig.TargetDBConnStr)
         {
            
         }
