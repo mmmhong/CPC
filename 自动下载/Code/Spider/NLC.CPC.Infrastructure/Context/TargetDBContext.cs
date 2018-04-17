@@ -13,7 +13,7 @@ namespace NLC.CPC.Infrastructure.Context
 {
     public class TargetDBContext : DbContext
     {
-        public TargetDBContext() : base(GetConfig.GetTargetDBConnStr())
+        public TargetDBContext() : base(GetConfig.GetTargetDBConnStr)
         {
            
         }

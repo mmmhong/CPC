@@ -59,11 +59,5 @@ namespace NLC.CPC.IRepository
         /// <param name="id"></param>
         /// <returns></returns>
         int GetState(string id);
-
-        /// <summary>
-        /// TEST
-        /// </summary>
-        /// <returns></returns>
-        string test();
     }
 }

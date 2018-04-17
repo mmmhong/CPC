@@ -14,18 +14,12 @@ namespace NLC.CPC.IService
         /// <param name="cookie"></param>
         /// <param name="connStr"></param>
         /// <returns></returns>
-        bool downloadPatient();
+        void downloadPatient();
 
         /// <summary>
         /// 下载患者病历
         /// </summary>
         /// <returns></returns>
-        bool downloadRecord();
-
-        /// <summary>
-        /// TEST
-        /// </summary>
-        /// <returns></returns>
-        string test();
+        void downloadRecord();
     }
 }

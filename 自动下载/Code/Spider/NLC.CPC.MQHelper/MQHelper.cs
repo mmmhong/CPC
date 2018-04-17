@@ -13,19 +13,20 @@ namespace NLC.CPC.MQ
     public class MQSend
     {
         public ProducterProvider mq;
+
         public MQSend()
         {
             mq = ProducterPoolHelper.GetPool(new BusinessMQConfig()
             {
-                ManageConnectString = GetConfig.GetManagerConnectStr()
-            }, GetConfig.GetMqPath());
+                ManageConnectString = GetConfig.GetManagerConnectStr
+            }, GetConfig.GetMqPath);
         }
     }
 
     public class MQReceive : BSF.BaseService.TaskManager.BaseDllTask
-        
     {
         public ConsumerProvider Consumer;
+        private GetConfig getConfig = new GetConfig();
 
         public override void Run()
         {
@@ -39,10 +40,10 @@ namespace NLC.CPC.MQ
 
                     Consumer.Config = new BusinessMQConfig()
                     {
-                        ManageConnectString = GetConfig.GetManagerConnectStr()
+                        ManageConnectString = GetConfig.GetManagerConnectStr
                     };
                     Consumer.MaxReceiveMQThread = 1;
-                    Consumer.MQPath = GetConfig.GetMqPath();
+                    Consumer.MQPath = GetConfig.GetMqPath;
                     Consumer.PartitionIndexs = new List<int>() { 1 };
                 }
             }

@@ -15,35 +15,30 @@ namespace NLC.CPC.Infrastructure.Common
         public HttpWebRequest GetPatientRequest()
         {
             HttpWebRequest request = null;
-            try
+
+            //Request配置
+            request = (HttpWebRequest)HttpWebRequest.Create("http://data.chinacpc.org/patient/getPatientList");
+            request.Accept = "application/json,text/plain,*/*";
+            request.Headers.Add("Cookie", GetConfig.GetCookie);//填写Cookie
+            request.ContentType = "application/json;charset=UTF-8";
+            request.Method = "POST";
+            request.Host = "data.chinacpc.org";
+            request.KeepAlive = true;
+            request.UserAgent = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Mobile Safari/537.36";
+            request.Referer = "http://data.chinacpc.org/Patient/PatientList";
+
+            //poststring从json文件中获取
+
+            string postString = GetConfig.GetPostString;
+
+            var data = Encoding.ASCII.GetBytes(postString);
+            request.ContentLength = data.Length;
+            using (var stream1 = request.GetRequestStream())
             {
-                //Request配置
-                request = (HttpWebRequest)HttpWebRequest.Create("http://data.chinacpc.org/patient/getPatientList");
-                request.Accept = "application/json,text/plain,*/*";
-                request.Headers.Add("Cookie",GetConfig.GetCookie());//填写Cookie
-                request.ContentType = "application/json;charset=UTF-8";
-                request.Method = "POST";
-                request.Host = "data.chinacpc.org";
-                request.KeepAlive = true;
-                request.UserAgent = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Mobile Safari/537.36";
-                request.Referer = "http://data.chinacpc.org/Patient/PatientList";
-
-                //poststring从json文件中获取
-
-                string postString = File.ReadAllText("..\\..\\Config\\GetPatientList.json", Encoding.Default);
-
-                var data = Encoding.ASCII.GetBytes(postString);
-                request.ContentLength = data.Length;
-                using (var stream1 = request.GetRequestStream())
-                {
-                    stream1.Write(data, 0, data.Length);
-                }
-                return request;
+                stream1.Write(data, 0, data.Length);
             }
-            catch (Exception ex)
-            {
-                return null;
-            }
+            return request;
+
         }
 
         public List<HttpWebRequest> GetRecordRequestById(string id)
@@ -57,23 +52,16 @@ namespace NLC.CPC.Infrastructure.Common
 
             foreach (var str in urlList)
             {
-                try
-                {
-                    HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(str);
-                    request.Method = "GET";
-                    request.Accept = "application/json, text/plain, */*";
-                    request.KeepAlive = true;
-                    request.Headers.Add("Cookie", GetConfig.GetCookie());
-                    request.Host = "data.chinacpc.org";
-                    request.Referer = "http://data.chinacpc.org/patient/crfplane?patientId=1384d418-be23-48ad-b503-b7f45517f924";
-                    request.UserAgent = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Mobile Safari/537.36";
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(str);
+                request.Method = "GET";
+                request.Accept = "application/json, text/plain, */*";
+                request.KeepAlive = true;
+                request.Headers.Add("Cookie", GetConfig.GetCookie);
+                request.Host = "data.chinacpc.org";
+                request.Referer = "http://data.chinacpc.org/patient/crfplane?patientId=1384d418-be23-48ad-b503-b7f45517f924";
+                request.UserAgent = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Mobile Safari/537.36";
 
-                    requestList.Add(request);
-                }
-                catch(Exception)
-                {
-
-                }
+                requestList.Add(request);
             }
             return requestList;
         }

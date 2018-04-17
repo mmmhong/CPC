@@ -33,34 +33,23 @@ namespace NLC.CPC.Repository
         /// <returns></returns>
         public bool SavePatientList(List<string> patientList)
         {
-            try
+            using (var myDBContext = new SourceDBContext())
             {
-                using (var myDBContext = new SourceDBContext())
+                var list = myDBContext.Patient.Where(p => p.SaveState > -1).ToList();
+                foreach (var l in list)
                 {
-                    var list = myDBContext.Patient.Where(p => p.SaveState > -1).ToList();
-                    foreach (var l in list)
-                    {
-                        myDBContext.Patient.Remove(l);
-                    }
-                    myDBContext.SaveChanges();
-                    foreach (string s in patientList)
-                    {
-                        myDBContext.Patient.Add(new Patient
-                        {
-                            PatientID = s,
-                            SaveState = 0
-                        });
-                        myDBContext.SaveChanges();
-                    }
+                    myDBContext.Patient.Remove(l);
                 }
-            }
-            catch (DbUpdateException ex)
-            {
-                //插入重复值
-            }
-            catch(Exception ex)
-            {
-                string str = ex.Message;
+                myDBContext.SaveChanges();
+                foreach (string s in patientList)
+                {
+                    myDBContext.Patient.Add(new Patient
+                    {
+                        PatientID = s,
+                        SaveState = 0
+                    });
+                    myDBContext.SaveChanges();
+                }
             }
             return true;
         }
@@ -97,10 +86,7 @@ namespace NLC.CPC.Repository
                     context.SaveChanges();
                 }
             }
-
-
             return true;
-
         }
 
         /// <summary>
@@ -161,16 +147,6 @@ namespace NLC.CPC.Repository
             }
         }
 
-
-        /// <summary>
-        /// TEST
-        /// </summary>
-        /// <returns></returns>
-        public string test()
-        {
-            return "aaa";
-        }
-
         /// <summary>
         /// 保存患者病历
         /// </summary>
@@ -201,6 +177,11 @@ namespace NLC.CPC.Repository
             return true;
         }
 
+        /// <summary>
+        /// 修改已经迁移的ID状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public bool ChangeState(string id)
         {
             SourceDBContext sContext = new SourceDBContext();
@@ -211,6 +192,11 @@ namespace NLC.CPC.Repository
             return true;
         }
 
+        /// <summary>
+        /// 获取当前ID号的状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public int GetState(string id)
         {
             SourceDBContext sContext = new SourceDBContext();

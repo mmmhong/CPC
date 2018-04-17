@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using BSF.BaseService.ConfigManager;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,66 +11,70 @@ namespace NLC.CPC.Infrastructure.Common
 {
     public class GetConfig
     {
+
+
         /// <summary>
         /// 获取Cookie配置
         /// </summary>
         /// <returns></returns>
-        public static string GetCookie()
+        public static string GetCookie
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory + "\\Config\\DownloadConfig.json";
-            string json = File.ReadAllText(path, Encoding.Default);
-            JObject jo = JObject.Parse(json);
-            string cookie = jo["Cookie"].ToString();
-            return cookie;
+            get { return ConfigManagerHelper.Get<string>("Cookie"); }
         }
 
         /// <summary>
         /// 获取源数据库连接配置
         /// </summary>
         /// <returns></returns>
-        public static string GetSourceDBConnStr()
+        public static string GetSourceDBConnStr
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory + "\\Config\\DownloadConfig.json";
-            string json = File.ReadAllText(path, Encoding.Default);
-            JObject jo = JObject.Parse(json);
-            jo = JObject.Parse(jo["SourceDB"].ToString());
-            string connStr = $"Data Source={jo["DBSource"].ToString()};Initial Catalog={jo["DBName"].ToString()};User ID={jo["DBUserName"].ToString()};Password={jo["DBPwd"].ToString()}";
-            return connStr;
+            get
+            {
+                string DBSource = ConfigManagerHelper.Get<string>("sDBSource");
+                string DBName = ConfigManagerHelper.Get<string>("sDBName");
+                string sDBUsername = ConfigManagerHelper.Get<string>("sDBUserName");
+                string DBPwd = ConfigManagerHelper.Get<string>("sDBPwd");
+
+                string connStr = $"Data Source={DBSource};Initial Catalog={DBName};User ID={sDBUsername};Password={DBPwd}";
+                return connStr;
+            }
         }
 
         /// <summary>
         /// 获取目标数据库连接配置
         /// </summary>
         /// <returns></returns>
-        public static string GetTargetDBConnStr()
+        public static string GetTargetDBConnStr
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory + "\\Config\\DownloadConfig.json";
-            string json = File.ReadAllText(path, Encoding.Default);
-            JObject jo = JObject.Parse(json);
-            jo = JObject.Parse(jo["TargetDB"].ToString());
-            string connStr = $"Data Source={jo["DBSource"].ToString()};Initial Catalog={jo["DBName"].ToString()};User ID={jo["DBUserName"].ToString()};Password={jo["DBPwd"].ToString()}";
-            return connStr;
+            get
+            {
+                string DBSource = ConfigManagerHelper.Get<string>("tDBSource");
+                string DBName = ConfigManagerHelper.Get<string>("tDBName");
+                string sDBUsername = ConfigManagerHelper.Get<string>("tDBUserName");
+                string DBPwd = ConfigManagerHelper.Get<string>("tDBPwd");
+
+                string connStr = $"Data Source={DBSource};Initial Catalog={DBName};User ID={sDBUsername};Password={DBPwd}";
+                return connStr;
+            }
         }
 
         /// <summary>
         /// 获取消息队列连接字符串
         /// </summary>
         /// <returns></returns>
-        public static string GetManagerConnectStr()
+        public static string GetManagerConnectStr
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory + "\\Config\\MQString.json";
-            string json = File.ReadAllText(path, Encoding.Default);
-            JObject jo = JObject.Parse(json);
-            string str = jo["ManagerConnectionString"].ToString();
-            return jo["ManagerConnectionString"].ToString();
+            get { return ConfigManagerHelper.Get<string>("ManagerConnectionString"); }
         }
 
-        public static string GetMqPath()
+        public static string GetMqPath
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory + "\\Config\\MQString.json";
-            string json = File.ReadAllText(path, Encoding.Default);
-            JObject jo = JObject.Parse(json);
-            return jo["mqpath"].ToString();
+            get { return ConfigManagerHelper.Get<string>("mqpath"); }
+        }
+
+        public static string GetPostString
+        {
+            get { return ConfigManagerHelper.Get<string>("postString"); }
         }
     }
 }

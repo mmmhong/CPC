@@ -13,10 +13,8 @@ namespace NLC.CPC.Infrastructure.Context
 {
     public class SourceDBContext : DbContext
     {
-        
-        public SourceDBContext() : base(GetConfig.GetSourceDBConnStr())
+        public SourceDBContext() : base(GetConfig.GetSourceDBConnStr)
         {
-            var d = Database;
         }
         static SourceDBContext()
         {

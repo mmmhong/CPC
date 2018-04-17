@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using BSF.BaseService.ConfigManager;
 using IService;
 using Newtonsoft.Json.Linq;
 using NLC.CPC.IRepository;
@@ -29,7 +30,7 @@ namespace MQUI
 
         private void DoMigration_Click(object sender, RoutedEventArgs e)
         {
-            SaveAppSettings();
+           // SaveAppSettings();
             string str = DoMigration.Content.ToString();
             if (str.Equals("启动消息队列"))
             {
@@ -109,20 +110,27 @@ namespace MQUI
         {
             try
             {
-                string json = File.ReadAllText("..\\..\\Config\\DownloadConfig.json", Encoding.Default);
-                JObject jo = JObject.Parse(json);
+                string path = AppDomain.CurrentDomain.BaseDirectory + "\\Config\\ConfigCenter.json";
+                string json = File.ReadAllText(path, Encoding.Default);
 
-                JObject tempJo = JObject.Parse(jo["SourceDB"].ToString());
-                sDBName.Text = tempJo["DBName"].ToString();
-                sDBPwd.Password = tempJo["DBPwd"].ToString();
-                sDBUserName.Text = tempJo["DBUserName"].ToString();
-                sDBSource.Text = tempJo["DBSource"].ToString();
+                string projectName = (JObject.Parse(json))["ProjectName"].ToString();
+                string configManagerConnectString = (JObject.Parse(json))["ConfigManagerConnectString"].ToString();
 
-                tempJo = JObject.Parse(jo["TargetDB"].ToString());
-                tDBName.Text = tempJo["DBName"].ToString();
-                tDBPwd.Password = tempJo["DBPwd"].ToString();
-                tDBUserName.Text = tempJo["DBUserName"].ToString();
-                tDBSource.Text = tempJo["DBSource"].ToString();
+                XXF.Common.XXFConfig.ProjectName = projectName;
+                XXF.Common.XXFConfig.ConfigManagerConnectString = configManagerConnectString;
+
+                BSF.Config.BSFConfig.ProjectName = projectName;
+                BSF.Config.BSFConfig.ConfigManagerConnectString = configManagerConnectString;
+
+                sDBName.Text = ConfigManagerHelper.Get<string>("sDBName");
+                sDBPwd.Password = ConfigManagerHelper.Get<string>("sDBPwd");
+                sDBUserName.Text = ConfigManagerHelper.Get<string>("sDBUserName");
+                sDBSource.Text = ConfigManagerHelper.Get<string>("sDBSource");
+
+                tDBName.Text = ConfigManagerHelper.Get<string>("tDBName");
+                tDBPwd.Password = ConfigManagerHelper.Get<string>("tDBPwd");
+                tDBUserName.Text = ConfigManagerHelper.Get<string>("tDBUserName");
+                tDBSource.Text = ConfigManagerHelper.Get<string>("tDBSource");
             }
             catch (Exception ex)
             {

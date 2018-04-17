@@ -35,27 +35,19 @@ namespace NLC.CPC.Service
         /// <param name="cookie"></param>
         /// <param name="connStr"></param>
         /// <returns></returns>
-        public bool downloadPatient()
+        public void downloadPatient()
         {
-            try
-            {
-                HttpWebRequest request = getRequest.GetPatientRequest();
-                string responseString = SR.GetResponseString(request);
-                List<string> IDList = jsonParse.PatientListParse(responseString);//调用解析方法
-                this._idal.SavePatientList(IDList);//调用存储方法
-            }
-            catch (Exception E)
-            {
-                return false;
-            }
-            return true;
+            HttpWebRequest request = getRequest.GetPatientRequest();
+            string responseString = SR.GetResponseString(request);
+            List<string> IDList = jsonParse.PatientListParse(responseString);//调用解析方法
+            this._idal.SavePatientList(IDList);//调用存储方法
         }
 
         /// <summary>
         /// 下载患者病历并存储到数据库
         /// </summary>
         /// <returns></returns>
-        public bool downloadRecord()
+        public void downloadRecord()
         {
             GetRequest getRequest = new GetRequest();
             var patientList = this._idal.GetPatientList();
@@ -86,7 +78,7 @@ namespace NLC.CPC.Service
                                 {
                                     list.Add(l);
                                 }
-                                else if(recordList.IndexOf(l)==48)
+                                else if (recordList.IndexOf(l) == 48)
                                 {
                                     this._idal.SavePatientRecord(list, v.PatientID, "Regmodel");
                                     list = new List<KeyValuePair<string, string>>();
@@ -107,12 +99,6 @@ namespace NLC.CPC.Service
                 }
                 MQ.mq.SendMessage(v.PatientID);//将保存好的患者ID发送到消息队列
             }
-            return true;
-        }
-
-        public string test()
-        {
-            return this._idal.test() + "abc";
         }
     }
 }

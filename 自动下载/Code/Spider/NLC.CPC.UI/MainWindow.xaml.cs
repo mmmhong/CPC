@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using BSF.BaseService.ConfigManager;
 using IService;
 using Newtonsoft.Json.Linq;
 using NLC.CPC.IRepository;
@@ -36,7 +37,7 @@ namespace DownloadUI
         public MainWindow()
         {
             InitializeComponent();
-            ShowConfig();
+            LoadConfig();
             Register();//调用注册方法
         }
 
@@ -47,13 +48,7 @@ namespace DownloadUI
         /// <param name="e"></param>
         private async void Btn_DownloadPatient_Click(object sender, RoutedEventArgs e)
         {
-            if (Cookie.Text.Trim() == "" || sDBUserName.Text.Trim() == "" || sDBPwd.Password.Trim() == "" || sDBName.Text.Trim() == "" || sDBSource.Text.Trim() == "")
-            {
-                MessageBox.Show("都填全了吗！！");
-            }
-            //存储配置
-            SaveAppSettings();
-            MessageBox.Show("开始下载患者列表");
+          
             string str = await DownloadPatient();
             MessageBox.Show(str);
         }
@@ -74,14 +69,8 @@ namespace DownloadUI
                       {
                           Thread.Sleep(100);
                           var d = scope.Resolve<IDownload>();//解析接口的实例
-                          if (d.downloadPatient())//调用下载Service层下载患者列表方法
-                          {
-                              return "患者列表下载完成！";
-                          }
-                          else
-                          {
-                              return "下载出错";
-                          }
+                          d.downloadPatient();//调用下载Service层下载患者列表方法
+                          return "患者列表下载完成！";
                       }
                   }
                   catch (Exception e)
@@ -98,14 +87,7 @@ namespace DownloadUI
         /// <param name="e"></param>
         private async void Btn_DownloadRecord_Click(object sender, RoutedEventArgs e)
         {
-            if (Cookie.Text.Trim() == "" || sDBUserName.Text.Trim() == "" || sDBPwd.Password.Trim() == "" || sDBName.Text.Trim() == "" || sDBSource.Text.Trim() == "")
-            {
-                MessageBox.Show("都填全了吗！！");
-                return;
-            }
-            //存储配置
-            SaveAppSettings();
-
+            
             string str = await DownloadRecord();
             MessageBox.Show(str);
         }
@@ -122,30 +104,14 @@ namespace DownloadUI
                 {
                     MessageBox.Show("已开始下载病历");
                     var d = Container.Resolve<IDownload>();
-                    if (d.downloadRecord())
-                    {
-                        return "病历下载完成";
-                    }
-                    else
-                    {
-                        return "病历下载失败";
-                    }
+                    d.downloadRecord();
+                    return "病历下载完成";
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     return e.Message;
                 }
             });
-        }
-
-        /// <summary>
-        /// 测试连接
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Btn_Test_Click(object sender, RoutedEventArgs e)
-        {
-            SaveAppSettings();
         }
 
         /// <summary>
@@ -161,19 +127,12 @@ namespace DownloadUI
         #region 自定义方法
 
         /// <summary>
-        /// 从Config文件中读取配置信息显示在屏幕上
+        /// 从Config文件中读取配置中心配置字符串，再从配置中心读取配置显示在屏幕上
         /// </summary>
-        public void ShowConfig()
+        public void LoadConfig()
         {
-            string json = File.ReadAllText("..\\..\\Config\\DownloadConfig.json", Encoding.Default);
-            JObject jo = JObject.Parse(json);
-
-            JObject tempJo = JObject.Parse(jo["SourceDB"].ToString());
-            Cookie.Text = jo["Cookie"].ToString();
-            sDBName.Text = tempJo["DBName"].ToString();
-            sDBPwd.Password = tempJo["DBPwd"].ToString();
-            sDBUserName.Text = tempJo["DBUserName"].ToString();
-            sDBSource.Text = tempJo["DBSource"].ToString();
+            BSF.Config.BSFConfig.ProjectName = "Spider";
+            BSF.Config.BSFConfig.ConfigManagerConnectString = "server = 192.168.4.87; Initial Catalog = dyd_bs_configmanager; User ID = sa; Password = 123456; ";
         }
 
         /// <summary>
@@ -197,30 +156,6 @@ namespace DownloadUI
             }
         }
 
-        /// <summary>
-        /// 存储配置信息
-        /// </summary>
-        public void SaveAppSettings()
-        {
-            try
-            {
-                string json = File.ReadAllText("..\\..\\Config\\DownloadConfig.json", Encoding.Default);
-                JObject jo = JObject.Parse(json);
-                JObject temp = JObject.Parse(jo["SourceDB"].ToString());
-                temp["DBName"] = sDBName.Text;
-                temp["DBPwd"] = sDBPwd.Password;
-                temp["DBUserName"] = sDBUserName.Text;
-                temp["DBSource"] = sDBSource.Text;
-                jo["SourceDB"] = temp;
-
-
-                File.WriteAllText("..\\..\\Config\\DownloadConfig.json", jo.ToString());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
         #endregion
 
     }
