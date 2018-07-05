@@ -1,4 +1,8 @@
 ﻿using BSF.BaseService.ConfigManager;
+using Newtonsoft.Json.Linq;
+using System;
+using System.IO;
+using System.Text;
 
 namespace NLC.CPC.Infrastructure.Common
 {
@@ -29,6 +33,24 @@ namespace NLC.CPC.Infrastructure.Common
                 return connStr;
             }
         }
+
+        public static string SourceDBConnStrInConfig
+        {
+            get
+            {
+                string path = AppDomain.CurrentDomain.BaseDirectory + "\\Config\\ConfigCenter.json";
+                string json = File.ReadAllText(path, Encoding.Default);
+
+                string DBSource = (JObject.Parse(json))["sDBSource"].ToString();
+                string DBName = (JObject.Parse(json))["sDBName"].ToString();
+                string sDBUsername = (JObject.Parse(json))["sDBUserName"].ToString();
+                string DBPwd = (JObject.Parse(json))["sDBPwd"].ToString();
+
+                string connStr = $"Data Source={DBSource};Initial Catalog={DBName};User ID={sDBUsername};Password={DBPwd}";
+                return connStr;
+            }
+        }
+
 
         /// <summary>
         /// 目标数据库连接配置

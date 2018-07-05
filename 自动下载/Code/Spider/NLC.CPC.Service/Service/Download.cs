@@ -1,4 +1,6 @@
-﻿using NLC.CPC.Infrastructure.Common;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using NLC.CPC.Infrastructure.Common;
 using NLC.CPC.IRepository;
 using NLC.CPC.IService;
 using NLC.CPC.MQ;
@@ -13,7 +15,7 @@ namespace NLC.CPC.Service
         GetRequest getRequest = new GetRequest();
         JsonParse jsonParse = new JsonParse();
         SimulationRequest SR = new SimulationRequest();
-        MQSend MQ = new MQSend();
+        //  MQSend MQ = new MQSend();
 
         /// <summary>
         /// 构造函数
@@ -36,7 +38,73 @@ namespace NLC.CPC.Service
         }
 
         /// <summary>
-        /// 载患者病历并存储到数据库
+        /// 下载患者病历存储为字典
+        /// </summary>
+        public void downloadDataToDictionary()
+        {
+            GetRequest getRequest = new GetRequest();
+            var patientList = this._idal.GetPatientList();//获取患者ID列表
+
+            foreach (var v in patientList)//遍历ID列表
+            {
+                string data = string.Empty;
+                List<HttpWebRequest> request = getRequest.GetRecordRequestById(v.PatientID);
+                if (request.Count != 0)
+                {
+                    foreach (var r in request)
+                    {
+                        string resStr = SR.GetResponseString(r);
+                        string temp = GetJsonFromStr(resStr);
+                        data = string.IsNullOrEmpty(data) ? temp : data.Replace('}', ',') + temp.Substring(1);
+                    }
+                }
+                _idal.SaveDataAsCPC(v.PatientID, data);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="resStr"></param>
+        /// <returns></returns>
+        public string GetJsonFromStr(string resStr)
+        {
+            JObject resObj = JObject.Parse(resStr);
+
+            foreach (var x in resObj)
+            {
+                if (x.Key.Equals("Result"))
+                {
+                    resStr = x.Value.ToString();
+                    break;
+                }
+            }
+            resObj = JObject.Parse(resStr);
+
+            string data = string.Empty;
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+
+            foreach (var v in resObj)
+            {
+                if (resObj.Count > 10) break;
+                if (v.Key.ToLower().Equals("emergenmodel"))
+                {
+                    data = string.IsNullOrEmpty(data) ? data : data.Replace('}', ',') + v.Value.ToString().Substring(1);
+                }
+                else if (v.Key.ToLower().Equals("regmodel"))
+                {
+                    data = string.IsNullOrEmpty(data) ? v.Value.ToString() : data.Replace('}', ',') + v.Value.ToString().Substring(1);
+                }
+            }
+            if (string.IsNullOrEmpty(data))
+            {
+                data = resObj.ToString();
+            }
+            return data;
+        }
+
+        /// <summary>
+        /// 下载患者病历并存储到数据库
         /// </summary>
         public void downloadRecord()
         {
@@ -90,7 +158,7 @@ namespace NLC.CPC.Service
                         }
                     }
                 }
-                MQ.mq.SendMessage(v.PatientID);//将保存好的患者ID发送到消息队列
+                // MQ.mq.SendMessage(v.PatientID);//将保存好的患者ID发送到消息队列
             }
         }
     }

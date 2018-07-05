@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Text;
 
@@ -17,7 +20,12 @@ namespace NLC.CPC.Infrastructure.Common
             //Request配置
             request = (HttpWebRequest)HttpWebRequest.Create("http://data.chinacpc.org/patient/getPatientList");
             request.Accept = "application/json,text/plain,*/*";
-            request.Headers.Add("Cookie", GetConfig.Cookie);//填写Cookie
+            // request.Headers.Add("Cookie", GetConfig.Cookie);//填写Cookie
+
+            string path = AppDomain.CurrentDomain.BaseDirectory + "\\Config\\ConfigCenter.json";
+            string json = File.ReadAllText(path, Encoding.Default);
+            request.Headers.Add("Cookie", (JObject.Parse(json))["Cookie"].ToString());//config文件获取
+
             request.ContentType = "application/json;charset=UTF-8";
             request.Method = "POST";
             request.Host = "data.chinacpc.org";
@@ -27,7 +35,8 @@ namespace NLC.CPC.Infrastructure.Common
 
             //poststring从json文件中获取
 
-            string postString = GetConfig.PostString;
+            //string postString = GetConfig.PostString;
+            string postString = (JObject.Parse(json))["postString"].ToString();
 
             var data = Encoding.ASCII.GetBytes(postString);
             request.ContentLength = data.Length;
@@ -58,7 +67,12 @@ namespace NLC.CPC.Infrastructure.Common
                 request.Method = "GET";
                 request.Accept = "application/json, text/plain, */*";
                 request.KeepAlive = true;
-                request.Headers.Add("Cookie", GetConfig.Cookie);
+
+                string path = AppDomain.CurrentDomain.BaseDirectory + "\\Config\\ConfigCenter.json";
+                string json = File.ReadAllText(path, Encoding.Default);
+                request.Headers.Add("Cookie", (JObject.Parse(json))["Cookie"].ToString());
+                //request.Headers.Add("Cookie", GetConfig.Cookie);
+
                 request.Host = "data.chinacpc.org";
                 request.Referer = "http://data.chinacpc.org/patient/crfplane?patientId=1384d418-be23-48ad-b503-b7f45517f924";
                 request.UserAgent = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Mobile Safari/537.36";

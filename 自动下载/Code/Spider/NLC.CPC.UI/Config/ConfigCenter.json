@@ -1,4 +1,17 @@
 ﻿{
   "ProjectName": "Spider",
-  "ConfigManagerConnectString": "server=192.168.4.117;Initial Catalog=dyd_bs_configmanager;User ID=sa;Password=123456;"
+  "ConfigManagerConnectString": "server=192.168.4.117;Initial Catalog=dyd_bs_configmanager;User ID=sa;Password=123456;",
+  "postString": {"condition": {"IS_COMPLETE": false,"IS_QUESTION": false,"IS_ACTIVE": true,"ORDER_FIELD":"CREATE_DATE","ORDER_SORT":"DESC","START_TIME": "","END_DATETIME": "","Hospital_ID":"837af969-8f84-423d-a5ef-bb4c28d9d354" },"pageSize": 1000, "pageIndex": 1},
+  "mqpath": "maohong",
+  "ManagerConnectionString": "server=192.168.4.117;Initial Catalog=dyd_bs_MQ_manage;User ID=sa;Password=123456",
+  "tDBSource": "192.168.4.49",
+  "tDBUserName": "sa",
+  "tDBPwd": "123456",
+  "tDBName": "NL_ChestPainsCenter",
+  "sDBSource": "192.168.4.22",
+  "sDBUserName": "sa",
+  "sDBPwd": "123456",
+  "sDBName": "Patient",
+  "Cookie": "UM_distinctid=1628401d1d7496-08ad63d8ccd751-3a614f0b-144000-1628401d1d84da; acw_tc=AQAAAA/rTRzHrQoA+/tBMfx9yHS1ZsJI; __RequestVerificationToken=jpbe3eLxFARiBuaqJ8S85q3_DhZqZbdc5fYGdvbzs4kyMgpDbXyqMcKeKfaxEKSezzLU97z4nhWtucQYu7_BbxyRpbeeDKjCnZGkacsKncc1; CNZZDATA1261146931=1669548485-1522745789-%7C1530233509; ASP.NET_SessionId=2tkto5jlotzumpiix25sh0et; .ASPXAUTH=FB716B89FD7CB711AFDA37BFE36E31A85D5348677B8C92988891A393D82FAEF51428F5489279FE9AE3B385F9CF069355CEE979308818DEFA3BB39F01298D6F76E7FF35CD66CB4F20BF61A75DFE98EFDAE65F625B7901D1665566B86F32569A84"
+
 }

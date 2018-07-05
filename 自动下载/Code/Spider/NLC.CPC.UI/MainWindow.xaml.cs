@@ -24,7 +24,7 @@ namespace DownloadUI
         public MainWindow()
         {
             InitializeComponent();
-            LoadConfig();
+            //LoadConfig();   //加载配置中心配置
             Register();//调用注册方法
         }
 
@@ -35,8 +35,10 @@ namespace DownloadUI
         /// <param name="e"></param>
         private async void Btn_DownloadPatient_Click(object sender, RoutedEventArgs e)
         {
+            Btn_DownloadPatient.IsEnabled = false;
             string str = await DownloadPatient();
             MessageBox.Show(str);
+            Btn_DownloadPatient.IsEnabled = true;
         }
 
         /// <summary>
@@ -87,7 +89,8 @@ namespace DownloadUI
                 {
                     MessageBox.Show("已开始下载病历");
                     var d = Container.Resolve<IDownload>();
-                    d.downloadRecord();
+                    d.downloadDataToDictionary();
+                   // d.downloadRecord();
                     return "病历下载完成";
                 }
                 catch (Exception e)

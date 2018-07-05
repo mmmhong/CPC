@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLC.CPC.MQUI", "NLC.CPC.MQU
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQReceiveTask", "MQReceiveTask\MQReceiveTask.csproj", "{17A771F2-9AAF-46DF-A7F1-17C07D846228}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "插入转换关系表", "插入转换关系表\插入转换关系表.csproj", "{0873BF88-E08A-4723-A61B-057B35885836}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{17A771F2-9AAF-46DF-A7F1-17C07D846228}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17A771F2-9AAF-46DF-A7F1-17C07D846228}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17A771F2-9AAF-46DF-A7F1-17C07D846228}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0873BF88-E08A-4723-A61B-057B35885836}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0873BF88-E08A-4723-A61B-057B35885836}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0873BF88-E08A-4723-A61B-057B35885836}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0873BF88-E08A-4723-A61B-057B35885836}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

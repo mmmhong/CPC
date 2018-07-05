@@ -15,5 +15,10 @@
         /// </summary>
         /// <returns></returns>
         void downloadRecord();
+
+        /// <summary>
+        /// 将患者病历下载存储为字典
+        /// </summary>
+        void downloadDataToDictionary();
     }
 }

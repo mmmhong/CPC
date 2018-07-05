@@ -55,5 +55,7 @@ namespace NLC.CPC.IRepository
         /// <param name="id"></param>
         /// <returns></returns>
         int GetState(string id);
+
+        bool SaveDataAsCPC(string id, string data);
     }
 }

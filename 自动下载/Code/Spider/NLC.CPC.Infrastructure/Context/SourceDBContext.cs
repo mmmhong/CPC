@@ -8,7 +8,10 @@ namespace NLC.CPC.Infrastructure.Context
 {
     public class SourceDBContext : DbContext
     {
-        public SourceDBContext() : base(GetConfig.SourceDBConnStr)
+        //public SourceDBContext() : base(GetConfig.SourceDBConnStr)
+        //{
+        //}
+        public SourceDBContext() : base(GetConfig.SourceDBConnStrInConfig)
         {
         }
         static SourceDBContext()
@@ -35,5 +38,6 @@ namespace NLC.CPC.Infrastructure.Context
         public DbSet<FieldTable> FieldTable { get; set; }
         public DbSet<RecordType> RecordType { get; set; }
         public DbSet<FieldRelationship> FieldRelationship { get; set; }
+        public DbSet<CPCData> CPCData { get; set; }
     }
 }

@@ -204,5 +204,24 @@ namespace NLC.CPC.Repository
                        select p.SaveState;
             return Convert.ToInt32(temp);
         }
+
+        /// <summary>
+        /// 存储字典类型数据
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public bool SaveDataAsCPC(string id, string data)
+        {
+            using (var context = new SourceDBContext())
+            {
+                context.CPCData.Add(new CPCData
+                {
+                    Id = id,
+                    Data = data
+                });
+                context.SaveChanges();
+            }
+            return true;
+        }
     }
 }
